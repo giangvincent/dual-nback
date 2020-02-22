@@ -1,5 +1,5 @@
 # dual_nback_2020
-
+This is my first game project
 ## Project setup
 ```
 npm install
