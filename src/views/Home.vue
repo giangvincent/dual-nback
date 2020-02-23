@@ -7,6 +7,7 @@
 
     <div class="columns play-nav">
       <img src="../assets/images/home-area.png" alt="home-area" />
+      <router-link to="play">Play</router-link>
     </div>
 
     <div class="columns navs">

@@ -14,6 +14,13 @@
 
 .play-nav {
     padding: 0 3rem;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.play-nav a {
+    position: absolute;
 }
 
 .navs {
