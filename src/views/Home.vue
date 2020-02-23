@@ -1,18 +1,48 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="home">
+    <div class="columns logo">
+      <img src="../assets/images/logo.png" alt="logo" />
+    </div>
+    <!-- game logo -->
+
+    <div class="columns play-nav">
+      <img src="../assets/images/home-area.png" alt="home-area" />
+    </div>
+
+    <div class="columns navs">
+      <p class="field">
+        <a class="button is-fullwidth">Leaders board</a>
+      </p>
+      <p class="field">
+        <a class="button is-fullwidth">Tutorials</a>
+      </p>
+      <p class="field">
+        <a class="button is-fullwidth">Settings</a>
+      </p>
+      
+    </div>
+
+    <footer class="footer-navs">
+      <ul class="inline">
+        <li>
+          <a>Policies</a>
+        </li>
+        <li>
+          <a>Terms</a>
+          
+        </li>
+      </ul>
+    </footer>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
 export default {
-  name: 'home',
-  components: {
-    HelloWorld
-  }
-}
+  name: "home",
+  components: {}
+};
 </script>
+
+<style lang="scss">
+@import url("../themes/home.scss");
+</style>
