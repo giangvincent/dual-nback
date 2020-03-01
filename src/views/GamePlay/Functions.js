@@ -1,3 +1,5 @@
+import store from '../../store/'
+
 import { Howl } from 'howler';
 // converts date from computer style into human style (day/month/year)
 Date.prototype.ddmmyy = function () {
@@ -39,22 +41,11 @@ export default {
 
     // adds a class to a HTML element
     // and then removes that class after a certain amount of time
-    wow:function(element, _class, time) {
-        $(element).addClass(_class);
+    wow:function(time) {
+        store.game.commit("SET_WOWCLASS", true);
         setTimeout(function () {
-            $(element).removeClass(_class);
+            store.game.commit("SET_WOWCLASS", false);
         }, time);
-    },
-
-    // assigns a function onChange of an element
-    onChange: function(element, _function) {
-        $(element).on("change", _function);
-    },
-
-    // assigns a new function to a button and changes its text
-    newOnClickFunction: function (element, newFunction, text) {
-        $(element).prop("onClick", null).attr("onClick", newFunction);
-        if (text !== undefined) $(element).text(text);
     },
 
     // uses an array of filenames of sounds (only .mp3 accepted)
@@ -72,7 +63,7 @@ export default {
                 );
             }
         );
-        return playableSounds;
+        store.game.commit("SET_PLAY_ABLE_SOUNDS", playableSounds);
     },
 
     // block-building-fns start
@@ -80,9 +71,7 @@ export default {
     // produces the number of stimuli
     // changes the text of #stimuli-counter
     calculateStimuli: function (n, clues) {
-        var stimuli = clues * (n + 1)
-        $("#stimuli-counter").text(stimuli);
-        return stimuli;
+        store.game.commit("SET_STIMULI_NUMBER", clues * (n + 1));
     },
 
     prepareBlock:function(n, stimuli, clues) {
@@ -179,7 +168,7 @@ export default {
         } else if (wrongPositions <= (tolleratedErrors + 2) || wrongSounds <= (tolleratedErrors + 2)) {
             return 1; // same level
         } else {
-            if (game.n !== 1)
+            if (store.game.n_level !== 1)
                 return 0; // previous level
             else
                 return -1; // level 1 failed, same level

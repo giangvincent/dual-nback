@@ -38,9 +38,21 @@
 </template>
 
 <script>
+import { mapState, mapActions, mapMutations } from 'vuex'
+
 export default {
   name: "home",
-  components: {}
+  components: {},
+  mounted: function() {
+
+  },
+  computed: {
+    ...mapState({})
+  },
+  methods: {
+    ...mapActions([]),
+    ...mapMutations([])
+  }
 };
 </script>
 

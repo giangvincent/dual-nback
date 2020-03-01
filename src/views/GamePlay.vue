@@ -39,12 +39,26 @@
 </template>
 
 <script>
+import { mapState, mapActions, mapMutations } from 'vuex'
+
 export default {
     name: "game play",
     data() {
         return {
 
         }
+    },
+    mouted: function() {
+
+    },
+    computed: {
+        ...mapState({
+
+        })
+    },
+    methods: {
+        ...mapMutations([]),
+        ...mapActions([])
     }
 }
 </script>
