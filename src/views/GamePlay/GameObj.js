@@ -168,7 +168,7 @@ export default {
 
         // decides what to do in each case of judgement
         // see judgeResults within functions.js to know more
-        switch (judgeResults(wrongPositions, wrongSounds, tolleratedErrors)) {
+        switch (Functions.judgeResults(wrongPositions, wrongSounds, tolleratedErrors)) {
             case 2:
                 enviroment.saveStats(true);
                 s += "<p class=\"results-text\">N is now: " + ++this.n + "</p>";
