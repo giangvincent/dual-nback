@@ -1,0 +1,39 @@
+#game-play {
+    height: 100vh;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+}
+.score {
+    height: 5rem;
+    width: 18.75rem;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.grid {
+    width: 18.75rem;
+    margin: 0 auto;
+}
+
+.grid__cell {
+    height: 6.25rem;
+    border: 1px solid #dddddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.grid__selected {
+    background-color: aqua;
+}
+
+.controls {
+    width: 18.75rem;
+    margin-top: 1rem;
+
+}

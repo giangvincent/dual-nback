@@ -28,6 +28,8 @@
 </template>
 
 <script>
+// TODO: define GAMEOVER
+// TODO: after this page
 export default {
     name: "game-over"
 }

@@ -38,6 +38,7 @@
 </template>
 
 <script>
+// TODO: ADD settings
 import { mapState, mapActions, mapMutations } from 'vuex'
 
 export default {

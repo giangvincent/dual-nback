@@ -1,14 +1,14 @@
 <template>
-  <div id="game-play">
-    <div class="score">
+  <div id="game-play" class="columns is-vcentered">
+    <div class="score column">
       NBack:
-      <input class="score__input" v-model.number="nBackLevel" />
+      <!-- <input class="score__input" v-model.number="nBackLevel" /> -->
       - Points: {{ points }}
     </div>
-    <table class="grid">
-      <tr class="grid__row" v-for="row in rows" v-bind:key="row">
-        <td
-          class="grid__cell"
+    <div class="grid">
+      <div class="grid__row columns is-mobile" v-for="row in rows" v-bind:key="row">
+        <div
+          class="grid__cell column"
           v-for="column in columns"
           :key="column"
           :class="{ grid__selected: (selectedRow === row && selectedColumn === column), hidden }"
@@ -18,17 +18,19 @@
             v-if="selectedRow === row && selectedColumn === column"
           >{{ selectedNumber }}</span>
           <span v-else>&nbsp;</span>
-        </td>
-      </tr>
-    </table>
-    <div class="controls">
-      <div @click="userSelectedPosition" class="controls__left">← Position</div>
-      <div @click="userSelectedNumber" class="controls__right">Number →</div>
+        </div>
+      </div>
+    </div>
+    <div class="controls column buttons">
+      <button @click="userSelectedPosition" class="button is-primary">← Position</button>
+      <button @click="userSelectedNumber" class="button is-primary">Number →</button>
     </div>
   </div>
 </template>
 
 <script>
+// TODO: add navigation
+// TODO: define gameover
 import { mapState, mapActions, mapMutations } from "vuex";
 
 export default {
