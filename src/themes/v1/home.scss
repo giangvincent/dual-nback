@@ -1,14 +1,15 @@
 /**
  * Style for Home scene
  */
-
 #home {
-    background-color: #aaaaaa;
     width: 100%;
+    max-width: 35rem;
     min-height: 100vh;
+    margin: 0 auto;
 }
 
 .logo {
+    margin: 0 auto;
     padding: 3rem 3rem 1.5rem 3rem;
 }
 

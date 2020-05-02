@@ -10,15 +10,15 @@
       <router-link to="play">Play</router-link>
     </div>
 
-    <div class="columns navs">
-      <p class="field">
-        <a class="button is-fullwidth">Leaders board</a>
+    <div class="columns navs is-mobile">
+      <p class="is-fullwidth">
+        <a class="button ">Leaders board</a>
       </p>
-      <p class="field">
-        <a class="button is-fullwidth">Tutorials</a>
+      <p class="is-fullwidth">
+        <a class="button ">Tutorials</a>
       </p>
-      <p class="field">
-        <a class="button is-fullwidth">Settings</a>
+      <p class="is-fullwidth">
+        <a class="button ">Settings</a>
       </p>
       
     </div>
