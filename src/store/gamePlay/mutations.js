@@ -14,10 +14,13 @@ export default {
     SET_STIMULI_NUMBER: function(state, payload) {
         state.stimuliNumber = payload;
     },
-    SET_PARAMS: function(state, payload) {
-        state.time = payload.time;
-        state.clues = payload.clues;
-        state.n_level = payload.n_level;
-        state.stimuliNumber = payload.stimuli;
+    SET_TIME: function(state, payload) {
+        state.time = payload;
+    },
+    SET_NLEVEL: function(state, payload) {
+        state.n_level = payload;
+    },
+    SET_NCLUES: function(state, payload) {
+        state.clues = payload;
     }
 }

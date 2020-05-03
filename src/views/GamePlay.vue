@@ -39,10 +39,9 @@ export default {
     return {
       columns: 3,
       rows: 3,
-      selectedRow: 2,
-      selectedColumn: 2,
-      selectedNumber: 5,
-      nBackLevel: 1,
+      selectedRow: null,
+      selectedColumn: null,
+      selectedNumber: null,
       points: 0,
       hidden: false
     };
@@ -50,7 +49,7 @@ export default {
   created() {
     window.addEventListener("keydown", this.onKey);
 
-    this.interval = 2000;
+    // this.interval = 2000;
     this.history = [];
     this.tries = {
       number: false,
@@ -61,7 +60,10 @@ export default {
   },
   mouted: function() {},
   computed: {
-    ...mapState({})
+    ...mapState({
+      nBackLevel: state => state.game.n_level,
+      interval: state => state.game.time
+    })
   },
   methods: {
     ...mapMutations([]),
