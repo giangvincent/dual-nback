@@ -3,5 +3,8 @@
  * ---------------------------
  * Route to version of Style
  */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 @import "./v1/style.scss";

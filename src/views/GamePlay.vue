@@ -1,14 +1,14 @@
 <template>
-  <div id="game-play" class="columns is-vcentered">
-    <div class="score column">
+  <div id="game-play" class="flex flex-col">
+    <div class="score mb-3">
       NBack:
       <!-- <input class="score__input" v-model.number="nBackLevel" /> -->
       - Points: {{ points }}
     </div>
     <div class="grid">
-      <div class="grid__row columns is-mobile" v-for="row in rows" v-bind:key="row">
+      <div class="grid__row flex is-mobile" v-for="row in rows" v-bind:key="row">
         <div
-          class="grid__cell column"
+          class="grid__cell w-1/3"
           v-for="column in columns"
           :key="column"
           :class="{ grid__selected: (selectedRow === row && selectedColumn === column), hidden }"
@@ -21,9 +21,9 @@
         </div>
       </div>
     </div>
-    <div class="controls column buttons">
-      <button @click="userSelectedPosition" class="button is-primary">← Position</button>
-      <button @click="userSelectedNumber" class="button is-primary">Number →</button>
+    <div class="controls flex flex-wrap justify-between m-auto mt-3">
+      <button @click="userSelectedPosition" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mb-2 rounded-full">← Position</button>
+      <button @click="userSelectedNumber" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mb-2 rounded-full">Number →</button>
     </div>
   </div>
 </template>
