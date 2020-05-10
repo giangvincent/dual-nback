@@ -53,7 +53,8 @@ export default {
         var wrongPositions = state.curPoints[1] + state.curPoints[2];
         var wrongNumbers = state.curPoints[4] + state.curPoints[5];
         if (wrongPositions <= tolleratedErrors && wrongNumbers <= tolleratedErrors) {
-            state.n_level += 2; // next level
+            state.n_level += 1; // next level
+            state.clues++;
         } else if (wrongPositions <= (tolleratedErrors + 2) || wrongNumbers <= (tolleratedErrors + 2)) {
             console.log('keep the level')
         } else {

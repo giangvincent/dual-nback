@@ -22,6 +22,7 @@ export default {
             type: "position_number",
             level: "normal"
         },
+        minRate: 0.2,
         wowClass: false,
         n_level: 1,
         playSounds: [],
