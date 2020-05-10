@@ -1,3 +1,4 @@
+
 <template>
   <div id="game-play" class="flex flex-col">
     <div class="score mb-3">
@@ -29,6 +30,7 @@
 </template>
 
 <script>
+/* eslint-disable no-console */
 // TODO: add navigation
 // TODO: define gameover
 import { mapState, mapActions, mapMutations } from "vuex";
@@ -37,19 +39,25 @@ export default {
   name: "game-play",
   data() {
     return {
+      clueFadeOutTime: 300,
       columns: 3,
       rows: 3,
       selectedRow: null,
       selectedColumn: null,
       selectedNumber: null,
-      points: 0,
-      hidden: false
+      hidden: false,
+      displayedClues: 0
     };
   },
+  computed: {
+    ...mapState({
+      nBackLevel: state => state.game.n_level,
+      interval: state => state.game.time,
+      clues: state => state.game.clues,
+      curPoints: state => state.game.curPoints
+    })
+  },
   created() {
-    window.addEventListener("keydown", this.onKey);
-
-    // this.interval = 2000;
     this.history = [];
     this.tries = {
       number: false,
@@ -59,18 +67,29 @@ export default {
     this.engine = setInterval(this.createSelection, this.interval);
   },
   mouted: function() {},
-  computed: {
-    ...mapState({
-      nBackLevel: state => state.game.n_level,
-      interval: state => state.game.time
-    })
-  },
+  
   methods: {
-    ...mapMutations([]),
+    ...mapMutations([
+      'SET_LASTPOINT',
+      'SET_MISSED_POINT',
+      'SET_WRONG_POINT',
+      'SET_RIGHT_POINT'
+    ]),
     ...mapActions([]),
     createSelection() {
+      console.log('created ', this.displayedClues)
+      this.checkDisplayedClues();
       this.hideSelection();
-      setTimeout(this.showSelection, 200);
+      setTimeout(this.showSelection, this.clueFadeOutTime);
+    },
+    checkDisplayedClues() {
+      this.displayedClues++;
+      if (this.displayedClues >= this.clues) {
+        
+        console.log('clear runnin engine');
+        clearInterval(this.engine);
+        this.$router.push('game-over');
+      }
     },
     hideSelection() {
       this.hidden = true;
@@ -90,10 +109,10 @@ export default {
         return 0;
       }
       if (this.tries.number === false && this.checkNumber()) {
-        this.points -= 1;
+        this.SET_MISSED_POINT('number');
       }
       if (this.tries.position === false && this.checkPosition()) {
-        this.points -= 1;
+        this.SET_MISSED_POINT('position');
       }
       return 0;
     },
@@ -103,30 +122,27 @@ export default {
     getRandomNumber() {
       return Math.floor(Math.random() * 10);
     },
-    onKey(event) {
-      const NUMBER = "ArrowRight";
-      const POSITION = "ArrowLeft";
-      const key = event.key;
-
-      if (key === NUMBER) {
-        this.userSelectedNumber();
-      } else if (key === POSITION) {
-        this.userSelectedPosition();
-      }
-    },
     userSelectedNumber() {
       if (this.tries.number) {
         return;
       }
       this.tries.number = true;
-      this.points += this.checkNumber() ? 1 : -1;
+      if (this.checkNumber()) {
+        this.SET_RIGHT_POINT('number');
+      } else {
+        this.SET_WRONG_POINT('number');
+      }
     },
     userSelectedPosition() {
       if (this.tries.position) {
         return;
       }
       this.tries.position = true;
-      this.points += this.checkPosition() ? 1 : -1;
+      if (this.checkPosition()) {
+        this.SET_RIGHT_POINT('position');
+      } else {
+        this.SET_WRONG_POINT('position');
+      }
     },
     checkNumber() {
       const length = this.history.length;

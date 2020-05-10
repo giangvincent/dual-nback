@@ -9,7 +9,17 @@ import getters from "./getters";
 
 export default {
     state: {
+        curPoints: [0, 0, 0, 0, 0, 0],
+        /* [
+            'right position' , 
+            'missed position', 
+            'wrong position', 
+            'right number or sound', 
+            'missed number or sound' , 
+            'wrong number or sound'
+        ] */
         game: {
+            type: "position_number",
             level: "normal"
         },
         wowClass: false,

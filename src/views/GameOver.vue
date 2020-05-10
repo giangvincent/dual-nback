@@ -30,8 +30,27 @@
 <script>
 // TODO: define GAMEOVER
 // TODO: after this page
+import { mapState, mapActions, mapMutations } from "vuex";
+
 export default {
-    name: "game-over"
+    name: "game-over",
+    data() {
+        return {
+
+        }
+    },
+    computed: {
+        ...mapState({
+            curPoints: state => state.game.curPoints,
+            nBackLevel: state => state.game.n_level,
+        })
+    },
+    methods: {
+        ...mapMutations([
+            'JUDGE_RESULTS'
+        ]),
+        ...mapActions([]),
+    }
 }
 </script>
 

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /**
     Module gamePlay
     -----------------
@@ -22,5 +23,45 @@ export default {
     },
     SET_NCLUES: function(state, payload) {
         state.clues = payload;
+    },
+    SET_MISSED_POINT: function(state, payload) {
+        if (payload === 'number') {
+            state.curPoints[4] += 1;
+        }
+        if (payload === 'position') {
+            state.curPoints[1] += 1;
+        }
+    },
+    SET_WRONG_POINT: function(state, payload) {
+        if (payload === 'number') {
+            state.curPoints[5] += 1;
+        }
+        if (payload === 'position') {
+            state.curPoints[2] += 1;
+        }
+    },
+    SET_RIGHT_POINT: function(state, payload) {
+        if (payload === 'number') {
+            state.curPoints[3] += 1;
+        }
+        if (payload === 'position') {
+            state.curPoints[0] += 1;
+        }
+    },
+    JUDGE_RESULTS: function(state) {
+        var tolleratedErrors = state.clues * state.minRate;
+        var wrongPositions = state.curPoints[1] + state.curPoints[2];
+        var wrongNumbers = state.curPoints[4] + state.curPoints[5];
+        if (wrongPositions <= tolleratedErrors && wrongNumbers <= tolleratedErrors) {
+            state.n_level += 2; // next level
+        } else if (wrongPositions <= (tolleratedErrors + 2) || wrongNumbers <= (tolleratedErrors + 2)) {
+            console.log('keep the level')
+        } else {
+            if (state.n_level !== 1)
+                state.n_level -= 1;
+            else
+                console.log('keep the level 1')
+        }
     }
+
 }

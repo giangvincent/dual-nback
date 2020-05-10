@@ -21,6 +21,7 @@
 }
 
 .grid__cell {
+    background-color: #ffffff;
     height: 6.25rem;
     border: 1px solid #dddddd;
     display: flex;
@@ -29,6 +30,11 @@
 }
 
 .grid__selected {
+    
+    -webkit-transition: background-color 0.4s ease-in-out;
+    -moz-transition: background-color 0.4s ease-in-out;
+    -ms-transition: background-color 0.4s ease-in-out;
+    -o-transition: background-color 0.4s ease-in-out;
     background-color: aqua;
 }
 
