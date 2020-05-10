@@ -2,9 +2,7 @@
 <template>
   <div id="game-play" class="flex flex-col">
     <div class="score mb-3">
-      NBack:
-      <!-- <input class="score__input" v-model.number="nBackLevel" /> -->
-      - Points: {{ points }}
+
     </div>
     <div class="grid">
       <div class="grid__row flex is-mobile" v-for="row in rows" v-bind:key="row">
@@ -12,10 +10,10 @@
           class="grid__cell w-1/3"
           v-for="column in columns"
           :key="column"
-          :class="{ grid__selected: (selectedRow === row && selectedColumn === column), hidden }"
+          :class="{ grid__selected: (selectedRow === row && selectedColumn === column) }"
         >
           <span
-            class="grid__number"
+            class="text-5xl font-bold"
             v-if="selectedRow === row && selectedColumn === column"
           >{{ selectedNumber }}</span>
           <span v-else>&nbsp;</span>
@@ -39,7 +37,7 @@ export default {
   name: "game-play",
   data() {
     return {
-      clueFadeOutTime: 300,
+      clueFadeOutTime: 400,
       columns: 3,
       rows: 3,
       selectedRow: null,
@@ -78,7 +76,7 @@ export default {
     ...mapActions([]),
     createSelection() {
       console.log('created ', this.displayedClues)
-      this.checkDisplayedClues();
+      // this.checkDisplayedClues();
       this.hideSelection();
       setTimeout(this.showSelection, this.clueFadeOutTime);
     },
@@ -92,12 +90,16 @@ export default {
       }
     },
     hideSelection() {
+      this.selectedColumn = null;
+      this.selectedRow = null;
       this.hidden = true;
     },
     showSelection() {
       this.checkForPenalty();
-      this.selectedColumn = this.getRandomPosition();
-      this.selectedRow = this.getRandomPosition();
+      /* this.selectedColumn = this.getRandomPosition();
+      this.selectedRow = this.getRandomPosition(); */
+      this.selectedColumn = 1;
+      this.selectedRow = 1;
       this.selectedNumber = this.getRandomNumber();
       this.tries.number = false;
       this.tries.position = false;

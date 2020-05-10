@@ -1,6 +1,8 @@
+
 <template>
-    <div id="game-over">
+    <div id="game-over" class="flex flex-col flex-wrap justify-center min-h-screen">
         <div class="game-indicator">
+            <router-link to="/">Home</router-link>
             <div class="columns is-mobile">
                 <div class="column is-half">
                     n = 1
@@ -35,6 +37,7 @@
 </template>
 
 <script>
+/* eslint-disable no-console */
 // TODO: define GAMEOVER
 // TODO: after this page
 import { mapState, mapActions, mapMutations } from "vuex";
