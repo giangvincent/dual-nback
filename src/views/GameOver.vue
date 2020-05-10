@@ -10,6 +10,13 @@
                 </div>
             </div>
         </div><!-- indicator -->
+        <div class="flex flex-wrap">
+            <div class="w-1/2">Positions</div>
+            <div class="w-1/2">Numbers</div>
+            <div class="w-1/2" v-for="(point, index) in curPoints" v-bind:key="index">
+                {{ point }}
+            </div>
+        </div><!-- summary current points -->
         <div class="summary">
             <div class="columns avatar">
                 <img src="" alt="avatar">
@@ -44,6 +51,13 @@ export default {
             curPoints: state => state.game.curPoints,
             nBackLevel: state => state.game.n_level,
         })
+    },
+    mounted() {
+        console.log('start to show curren point.');
+
+        console.log('start to judge');
+
+        console.log('animate to determine the n level')
     },
     methods: {
         ...mapMutations([
