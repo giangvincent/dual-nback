@@ -1,9 +1,16 @@
 
 <template>
-  <div id="game-play" class="flex flex-col">
-    <div class="score mb-3">
-
+  <div id="game-play" class="flex flex-col content-center justify-center flex-wrap">
+    <div class="flex">
+      <div class="w-1/2">
+        <router-link to="/">Home</router-link>
+      </div>
+      
+      <div class="w-1/2">
+        <div class="column is-half">n = 1</div>
+      </div>
     </div>
+    <!-- indicator -->
     <div class="grid">
       <div class="grid__row flex is-mobile" v-for="row in rows" v-bind:key="row">
         <div
@@ -21,8 +28,14 @@
       </div>
     </div>
     <div class="controls flex flex-wrap justify-between m-auto mt-3">
-      <button @click="userSelectedPosition" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mb-2 rounded-full">← Position</button>
-      <button @click="userSelectedNumber" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mb-2 rounded-full">Number →</button>
+      <button
+        @click="userSelectedPosition"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mb-2 rounded"
+      >← Position</button>
+      <button
+        @click="userSelectedNumber"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mb-2 rounded"
+      >Number →</button>
     </div>
   </div>
 </template>
@@ -65,28 +78,27 @@ export default {
     this.engine = setInterval(this.createSelection, this.interval);
   },
   mouted: function() {},
-  
+
   methods: {
     ...mapMutations([
-      'SET_LASTPOINT',
-      'SET_MISSED_POINT',
-      'SET_WRONG_POINT',
-      'SET_RIGHT_POINT'
+      "SET_LASTPOINT",
+      "SET_MISSED_POINT",
+      "SET_WRONG_POINT",
+      "SET_RIGHT_POINT"
     ]),
     ...mapActions([]),
     createSelection() {
-      console.log('created ', this.displayedClues)
-      // this.checkDisplayedClues();
+      console.log("created ", this.displayedClues);
+      this.checkDisplayedClues();
       this.hideSelection();
       setTimeout(this.showSelection, this.clueFadeOutTime);
     },
     checkDisplayedClues() {
       this.displayedClues++;
       if (this.displayedClues >= this.clues) {
-        
-        console.log('clear runnin engine');
+        console.log("clear runnin engine");
         clearInterval(this.engine);
-        this.$router.push('game-over');
+        this.$router.push("game-over");
       }
     },
     hideSelection() {
@@ -96,10 +108,8 @@ export default {
     },
     showSelection() {
       this.checkForPenalty();
-      /* this.selectedColumn = this.getRandomPosition();
-      this.selectedRow = this.getRandomPosition(); */
-      this.selectedColumn = 1;
-      this.selectedRow = 1;
+      this.selectedColumn = this.getRandomPosition();
+      this.selectedRow = this.getRandomPosition();
       this.selectedNumber = this.getRandomNumber();
       this.tries.number = false;
       this.tries.position = false;
@@ -111,10 +121,10 @@ export default {
         return 0;
       }
       if (this.tries.number === false && this.checkNumber()) {
-        this.SET_MISSED_POINT('number');
+        this.SET_MISSED_POINT("number");
       }
       if (this.tries.position === false && this.checkPosition()) {
-        this.SET_MISSED_POINT('position');
+        this.SET_MISSED_POINT("position");
       }
       return 0;
     },
@@ -130,9 +140,9 @@ export default {
       }
       this.tries.number = true;
       if (this.checkNumber()) {
-        this.SET_RIGHT_POINT('number');
+        this.SET_RIGHT_POINT("number");
       } else {
-        this.SET_WRONG_POINT('number');
+        this.SET_WRONG_POINT("number");
       }
     },
     userSelectedPosition() {
@@ -141,9 +151,9 @@ export default {
       }
       this.tries.position = true;
       if (this.checkPosition()) {
-        this.SET_RIGHT_POINT('position');
+        this.SET_RIGHT_POINT("position");
       } else {
-        this.SET_WRONG_POINT('position');
+        this.SET_WRONG_POINT("position");
       }
     },
     checkNumber() {

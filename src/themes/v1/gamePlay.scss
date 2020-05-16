@@ -18,21 +18,35 @@
 .grid {
     width: 18.75rem;
     margin: 0 auto;
-    background-color: #ffffff;
+    background-color: #1395BA;
 }
+
 
 .grid__cell {
     
     height: 6.25rem;
-    border: 1px solid #dddddd;
+    border: 1px solid #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
-    
+    background-color: #1395BA;
+}
+
+.grid .grid__row:nth-child(1) .grid__cell:nth-child(1) {
+  border-top-left-radius: 50%;
+}
+.grid .grid__row:nth-child(1) .grid__cell:nth-child(3) {
+  border-top-right-radius: 50%;
+}
+.grid .grid__row:nth-child(3) .grid__cell:nth-child(1) {
+  border-bottom-left-radius: 50%;
+}
+.grid .grid__row:nth-child(3) .grid__cell:nth-child(3) {
+  border-bottom-right-radius: 50%;
 }
 
 .grid__selected {
-    background-color: aqua;
+    background-color: #F16C20;
     -webkit-animation: flickerAnimation 2500ms infinite;
     -moz-animation: flickerAnimation 2500ms infinite;
     -o-animation: flickerAnimation 2500ms infinite;
@@ -40,19 +54,23 @@
 }
 @keyframes flickerAnimation {
     0%   { opacity:1; }
+    50%  { opacity: 0.7; }
     100% { opacity:0.2; }
   }
   @-o-keyframes flickerAnimation{
     0%   { opacity:1; }
-    100% { opacity:0.2; }
+    50%  { opacity: 0.9; }
+    100% { opacity:0.5; }
   }
   @-moz-keyframes flickerAnimation{
     0%   { opacity:1; }
-    100% { opacity:0.2; }
+    50%  { opacity: 0.9; }
+    100% { opacity:0.5; }
   }
   @-webkit-keyframes flickerAnimation{
     0%   { opacity:1; }
-    100% { opacity:0.2; }
+    50%  { opacity: 0.9; }
+    100% { opacity:0.5; }
   }
 
 
