@@ -7,15 +7,39 @@
  * - Base icons
  * - Button
  */
+
+/* load font source */
+@mixin font($font-family, $font-file, $font-weight, $font-style) {
+  @font-face {
+    font-family: $font-family;
+    src: url($font-file+'.ttf') format('truetype');
+    font-weight: $font-weight;
+    font-style: $font-style;
+  }
+}
+
+@include font('Baloo', '../../assets/fonts/Baloo2-Regular.ttf', 'normal', 'normal');
+
 body {
   background-color: #ffffff;
 }
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-family: 'Baloo', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
   width: 100%;
   min-height: 100vh;
+}
+
+.btn-3d {
+  box-shadow: 0 .2em #18acb7; 
+  border-color: #18acb7;
+  color: #18acb7;
+}
+.btn-3d:active, .start-btn:active {
+	box-shadow: none;
+	position: relative;
+	top: .2em;
 }

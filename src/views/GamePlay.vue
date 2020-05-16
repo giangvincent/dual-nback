@@ -1,7 +1,7 @@
 
 <template>
   <div id="game-play" class="flex flex-col content-center justify-center flex-wrap">
-    <div class="flex">
+    <div class="flex absolute top-0 w-full">
       <div class="w-1/2">
         <router-link to="/">Home</router-link>
       </div>
@@ -11,7 +11,7 @@
       </div>
     </div>
     <!-- indicator -->
-    <div class="grid">
+    <div class="grid mx-auto">
       <div class="grid__row flex is-mobile" v-for="row in rows" v-bind:key="row">
         <div
           class="grid__cell w-1/3"
@@ -27,14 +27,14 @@
         </div>
       </div>
     </div>
-    <div class="controls flex flex-wrap justify-between m-auto mt-3">
+    <div class="controls flex flex-wrap justify-between mx-auto">
       <button
         @click="userSelectedPosition"
-        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mb-2 rounded"
+        class="btn-3d rounded border-2 uppercase text-xl py-2 px-4 rounded"
       >← Position</button>
       <button
         @click="userSelectedNumber"
-        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mb-2 rounded"
+        class="btn-3d rounded border-2 uppercase text-xl py-2 px-4 rounded"
       >Number →</button>
     </div>
   </div>
@@ -75,7 +75,7 @@ export default {
       position: false
     };
     this.pushToHistory();
-    this.engine = setInterval(this.createSelection, this.interval);
+    // this.engine = setInterval(this.createSelection, this.interval);
   },
   mouted: function() {},
 

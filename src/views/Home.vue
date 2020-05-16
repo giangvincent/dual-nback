@@ -5,16 +5,17 @@
     </div>
     <!-- game logo -->
 
-    <div class="flex m-4 justify-center content-center flex-wrap">
+    <div class="flex m-4 mb-6 justify-center content-center flex-wrap">
       <img src="../assets/images/home-area.png" alt="home-area" />
-      <router-link class="absolute" to="play">Play</router-link>
+      <router-link class="absolute" to="play">
+        <img class="w-48" src="../assets/images/play_btn.png" alt="play">
+      </router-link>
     </div>
 
     <div class="flex flex-col m-4">
-      <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mb-2 rounded-full w-full">Leaders board</a>
-      <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mb-2 rounded-full w-full">Tutorials</a>
-      <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mb-2  rounded-full w-full">Settings</a>
-      
+      <a class="font-bold py-2 px-4 mb-4 w-full btn-3d rounded border-2 uppercase text-xl">Settings</a>
+      <a class="font-bold py-2 px-4 mb-4 w-full btn-3d rounded border-2 uppercase text-xl">Leaders board</a>
+      <a class="font-bold py-2 px-4 mb-4 w-full btn-3d rounded border-2 uppercase text-xl">Tutorials</a>
     </div>
 
     <footer class="flex flex-row justify-center flex-wrap mb-2 italic">
