@@ -1,14 +1,14 @@
 
 <template>
   <div id="game-play" class="flex flex-col content-center justify-center flex-wrap">
-    <div class="flex absolute top-0 w-full">
-      <div class="w-1/2">
-        <router-link to="/">Home</router-link>
+    <div class="flex absolute top-0 w-full h-16 text-white indicator-nav">
+      <div class="flex w-full justify-center relative content-center flex-wrap ">
+        <router-link class="router-link-active absolute left-0 h-full" to="/">Home</router-link>
+        <div class="">n = 1</div>
       </div>
-      
-      <div class="w-1/2">
-        <div class="column is-half">n = 1</div>
-      </div>
+    </div>
+    <div class="mb-6 text-xl">
+      Clues: <span>{{ clues - displayedClues }}</span>
     </div>
     <!-- indicator -->
     <div class="grid mx-auto">
@@ -27,7 +27,7 @@
         </div>
       </div>
     </div>
-    <div class="controls flex flex-wrap justify-between mx-auto">
+    <div class="controls flex flex-wrap justify-between mx-auto mt-6">
       <button
         @click="userSelectedPosition"
         class="btn-3d rounded border-2 uppercase text-xl py-2 px-4 rounded"
@@ -75,7 +75,7 @@ export default {
       position: false
     };
     this.pushToHistory();
-    // this.engine = setInterval(this.createSelection, this.interval);
+    this.engine = setInterval(this.createSelection, this.interval);
   },
   mouted: function() {},
 

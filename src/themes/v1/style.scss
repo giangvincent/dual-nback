@@ -19,6 +19,8 @@
 }
 
 @include font('Baloo', '../../assets/fonts/Baloo2-Regular.ttf', 'normal', 'normal');
+@include font('Baloo', '../../assets/fonts/Baloo2-Medium.ttf', 500, 'medium');
+@include font('Baloo', '../../assets/fonts/Baloo2-SemiBold.ttf', 700, 'bold');
 
 body {
   background-color: #ffffff;
@@ -32,7 +34,9 @@ body {
   width: 100%;
   min-height: 100vh;
 }
-
+.indicator-nav {
+  background: #f62d28;
+}
 .btn-3d {
   box-shadow: 0 .2em #18acb7; 
   border-color: #18acb7;
