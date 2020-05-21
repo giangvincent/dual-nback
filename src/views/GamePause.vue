@@ -1,6 +1,6 @@
 
 <template>
-  <div id="game-over" class="flex flex-col flex-wrap justify-center min-h-screen">
+  <div id="game-pause" class="flex flex-col flex-wrap justify-center min-h-screen">
     <div class="flex absolute top-0 w-full h-16 text-white indicator-nav">
       <div class="flex w-full justify-center relative content-center flex-wrap">
         <router-link class="router-link-active absolute left-0 h-full" to="/">Home</router-link>

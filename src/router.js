@@ -18,9 +18,9 @@ export default new Router({
       component: () => import('./views/GamePlay.vue')
     },
     {
-      path: '/game-over',
-      name: 'game-over',
-      component: () => import('./views/GameOver.vue')
+      path: '/game-pause',
+      name: 'game-pause',
+      component: () => import('./views/GamePause.vue')
     },
     {
       path: '/setting',

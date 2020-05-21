@@ -98,7 +98,7 @@ export default {
       if (this.displayedClues >= this.clues) {
         console.log("clear runnin engine");
         clearInterval(this.engine);
-        this.$router.push("game-over");
+        this.$router.push("game-pause");
       }
     },
     hideSelection() {
