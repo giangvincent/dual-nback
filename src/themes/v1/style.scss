@@ -33,6 +33,11 @@ body {
   color: #2c3e50;
   width: 100%;
   min-height: 100vh;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select:none;
+  user-select:none;
+  -o-user-select:none;
 }
 .indicator-nav {
   background: #f62d28;
@@ -42,8 +47,12 @@ body {
   border-color: #18acb7;
   color: #18acb7;
 }
-.btn-3d:active, .start-btn:active {
+.btn-3d-active {
 	box-shadow: none;
 	position: relative;
 	top: .2em;
+}
+
+.link-active:active {
+  text-decoration: underline;
 }

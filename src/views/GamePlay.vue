@@ -31,10 +31,12 @@
       <button
         @click="userSelectedPosition"
         class="btn-3d rounded border-2 uppercase text-xl py-2 px-4 rounded"
+        :class="{'btn-3d-active': selectedBtnPos}"
       >← Position</button>
       <button
         @click="userSelectedNumber"
         class="btn-3d rounded border-2 uppercase text-xl py-2 px-4 rounded"
+        :class="{'btn-3d-active': selectedBtnNum}"
       >Number →</button>
     </div>
   </div>
@@ -50,6 +52,8 @@ export default {
   name: "game-play",
   data() {
     return {
+      selectedBtnNum: false,
+      selectedBtnPos: false,
       clueFadeOutTime: 400,
       columns: 3,
       rows: 3,
@@ -113,6 +117,8 @@ export default {
       this.selectedNumber = this.getRandomNumber();
       this.tries.number = false;
       this.tries.position = false;
+      this.selectedBtnPos = false;
+      this.selectedBtnNum = false;
       this.pushToHistory();
       this.hidden = false;
     },
@@ -138,6 +144,7 @@ export default {
       if (this.tries.number) {
         return;
       }
+      this.selectedBtnNum = true;
       this.tries.number = true;
       if (this.checkNumber()) {
         this.SET_RIGHT_POINT("number");
@@ -149,6 +156,7 @@ export default {
       if (this.tries.position) {
         return;
       }
+      this.selectedBtnPos = true;
       this.tries.position = true;
       if (this.checkPosition()) {
         this.SET_RIGHT_POINT("position");
