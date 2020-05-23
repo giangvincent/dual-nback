@@ -7,8 +7,8 @@
 
     <div class="flex m-4 mb-6 justify-center content-center flex-wrap">
       <img src="../assets/images/home-area.png" alt="home-area" />
-      <router-link class="absolute" to="play">
-        <img class="w-48" src="../assets/images/play_btn.png" alt="play">
+      <router-link class="absolute p-10 w-48 h-48 rounded-full play-home-bg" to="play">
+        <img class="w-48" src="../assets/images/triangle-radius.png" alt="play">
       </router-link>
     </div>
 
