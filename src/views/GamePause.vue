@@ -23,9 +23,11 @@
         </div>
       </div>
       
-      <div class="flex p-2 m-2 rounded-lg self-center bg-blue-700 text-white">
-        <img class="w-6" src="../assets/icons/facebook.svg"/>
-        <span class="mx-2">Share</span>
+      <div class="flex w-full p-2 m-2 rounded-lg self-center bg-blue-700 text-white">
+        <div class="flex mx-auto">
+          <facebook-icon w="2rem" h="2rem" fill="#ffffff"></facebook-icon>
+          <span class="mx-2 text-2xl">Share</span>
+        </div>
       </div>
     </div>
     <!-- summary current points -->
@@ -37,7 +39,9 @@
         <div class="score">69</div>
         <div class="nback">n = 2</div>
       </div>
-      <div><img src="../assets/images/replay.png" class="w-10"/></div>
+      <div class="mx-auto flex p-4 w-20 rounded-full bg-black">
+        <img src="../assets/images/replay.png" class="w-10 ml-2"/>
+      </div>
     </div>
     <!-- summary -->
   </div>
@@ -45,14 +49,16 @@
 
 <script>
 /* eslint-disable no-console */
-// TODO: define GAMEOVER
-// TODO: after this page
 import { mapState, mapActions, mapMutations } from "vuex";
+import FacebookIcon from "../components/icons/facebook_icon"
 
 export default {
   name: "game-over",
   data() {
     return {};
+  },
+  components: {
+    FacebookIcon: FacebookIcon
   },
   computed: {
     ...mapState({
