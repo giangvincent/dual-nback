@@ -1,14 +1,14 @@
 <template>
   <div id="home">
     <div class="flex">
-      <img class="m-auto pt-4 px-4 pb-3" src="../assets/images/logo.png" alt="logo" />
+      <img class="m-auto pt-4 px-4 pb-3" src="@/assets/images/logo.png" alt="logo" />
     </div>
     <!-- game logo -->
 
     <div class="flex m-4 mb-6 justify-center content-center flex-wrap">
-      <img src="../assets/images/home-area.png" alt="home-area" />
+      <img src="@/assets/images/home-area.png" alt="home-area" />
       <router-link class="absolute p-10 w-48 h-48 rounded-full play-home-bg" to="play">
-        <img class="w-48" src="../assets/images/triangle-radius.png" alt="play">
+        <img class="w-48" src="@/assets/images/triangle-radius.png" alt="play">
       </router-link>
     </div>
 
@@ -38,7 +38,7 @@ export default {
     }
   },
   mounted: function() {
-
+    clearInterval(this.engine);
   },
   computed: {
     ...mapState({})

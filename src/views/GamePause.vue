@@ -82,6 +82,7 @@ export default {
     })
   },
   mounted() {
+    clearInterval(this.engine);
     console.log("start to show curren point.");
 
     console.log("start to judge");

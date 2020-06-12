@@ -83,7 +83,7 @@ export default {
     this.pushToHistory();
     this.engine = setInterval(this.createSelection, this.interval);
   },
-  mouted: function() {},
+  mounted: function() {},
 
   methods: {
     ...mapMutations([
