@@ -6,8 +6,8 @@
 export default {
   name: "facebook-icon",
   props: {
-    w: Number,
-    h: Number,
+    w: String,
+    h: String,
     fill: String
   }
 }
