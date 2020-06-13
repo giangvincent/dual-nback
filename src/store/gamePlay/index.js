@@ -24,11 +24,12 @@ export default {
         },
         minRate: 0.2,
         wowClass: false,
+        correctClues: 0,
         n_level: 1,
         playSounds: [],
         stimuliNumber: 1,
         time: 2000,
-        clues: 16
+        clues: 10
     },
     mutations: mutations,
     actions: actions,

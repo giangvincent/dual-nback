@@ -1,14 +1,7 @@
 
 <template>
   <div id="game-play" class="flex flex-col content-center justify-center flex-wrap">
-    <div class="flex absolute top-0 w-full h-16 text-white indicator-nav">
-      <div class="flex w-full justify-center relative content-center flex-wrap ">
-        <router-link class="router-link-active absolute left-0 h-full pl-2 flex content-center flex-wrap" to="/">
-          <img class="w-8" src="../assets/images/back-btn.png" />
-        </router-link>
-        <div class="">n = 1</div>
-      </div>
-    </div>
+    <navigator :nlevel="nBackLevel"></navigator>
     <div class="mb-6 text-xl">
       Clues: <span>{{ clues - displayedClues }}</span>
     </div>
@@ -46,9 +39,8 @@
 
 <script>
 /* eslint-disable no-console */
-// TODO: add navigation
-// TODO: define gameover
 import { mapState, mapActions, mapMutations } from "vuex";
+import Navigator from "../components/Navigator"
 
 export default {
   name: "game-play",
@@ -66,6 +58,9 @@ export default {
       displayedClues: 0
     };
   },
+  components: {
+    Navigator: Navigator
+  },
   computed: {
     ...mapState({
       nBackLevel: state => state.game.n_level,
@@ -80,7 +75,8 @@ export default {
       number: false,
       position: false
     };
-    this.pushToHistory();
+    // this.pushToHistory();
+    
     this.engine = setInterval(this.createSelection, this.interval);
   },
   mounted: function() {},
@@ -90,22 +86,30 @@ export default {
       "SET_LASTPOINT",
       "SET_MISSED_POINT",
       "SET_WRONG_POINT",
-      "SET_RIGHT_POINT"
+      "SET_RIGHT_POINT",
+      "INCR_CORRECT_CLUES"
     ]),
     ...mapActions([]),
-    createSelection() {
+    async createSelection() {
       console.log("created ", this.displayedClues);
-      this.checkDisplayedClues();
+      this.checkForPenalty();
       this.hideSelection();
-      setTimeout(this.showSelection, this.clueFadeOutTime);
+      var self = this
+      this.checkDisplayedClues().then(() => {
+        setTimeout(self.showSelection, self.clueFadeOutTime);
+      });
     },
     checkDisplayedClues() {
-      this.displayedClues++;
       if (this.displayedClues >= this.clues) {
         console.log("clear runnin engine");
         clearInterval(this.engine);
         this.$router.push("game-pause");
       }
+      this.displayedClues++;
+      return new Promise((res, rej) => {
+        res();
+        rej();
+      })
     },
     hideSelection() {
       this.selectedColumn = null;
@@ -113,7 +117,6 @@ export default {
       this.hidden = true;
     },
     showSelection() {
-      this.checkForPenalty();
       this.selectedColumn = this.getRandomPosition();
       this.selectedRow = this.getRandomPosition();
       this.selectedNumber = this.getRandomNumber();
@@ -121,26 +124,30 @@ export default {
       this.tries.position = false;
       this.selectedBtnPos = false;
       this.selectedBtnNum = false;
-      this.pushToHistory();
       this.hidden = false;
+      this.pushToHistory();
+      
     },
     checkForPenalty() {
-      if (this.history.length < 1 + this.nBackLevel) {
+      if (this.history.length < this.nBackLevel) {
         return 0;
       }
       if (this.tries.number === false && this.checkNumber()) {
         this.SET_MISSED_POINT("number");
+        this.INCR_CORRECT_CLUES()
       }
       if (this.tries.position === false && this.checkPosition()) {
         this.SET_MISSED_POINT("position");
+        this.INCR_CORRECT_CLUES()
       }
       return 0;
     },
     getRandomPosition() {
-      return Math.floor(Math.random() * 3 + 1);
+      return Math.floor(Math.random() * 3 + 1)
     },
     getRandomNumber() {
-      return Math.floor(Math.random() * 10);
+      var randNumber = Math.floor(Math.random() * (this.nBackLevel + 2) * 2 + 0)
+      return randNumber > 9 ? 9 : randNumber
     },
     userSelectedNumber() {
       if (this.tries.number) {
@@ -149,6 +156,7 @@ export default {
       this.selectedBtnNum = true;
       this.tries.number = true;
       if (this.checkNumber()) {
+        this.INCR_CORRECT_CLUES()
         this.SET_RIGHT_POINT("number");
       } else {
         this.SET_WRONG_POINT("number");
@@ -161,6 +169,7 @@ export default {
       this.selectedBtnPos = true;
       this.tries.position = true;
       if (this.checkPosition()) {
+        this.INCR_CORRECT_CLUES()
         this.SET_RIGHT_POINT("position");
       } else {
         this.SET_WRONG_POINT("position");
@@ -168,15 +177,14 @@ export default {
     },
     checkNumber() {
       const length = this.history.length;
-
       return (
         this.selectedNumber ===
-        this.history[length - 1 - this.nBackLevel].number
+        this.history[length - this.nBackLevel].number
       );
     },
     checkPosition() {
       const length = this.history.length;
-      const target = this.history[length - 1 - this.nBackLevel];
+      const target = this.history[length - this.nBackLevel];
       return (
         this.selectedColumn === target.column && this.selectedRow === target.row
       );
@@ -187,12 +195,11 @@ export default {
         row: this.selectedRow,
         number: this.selectedNumber
       });
-
       const length = this.history.length;
-
-      if (length > this.nBackLevel + 1) {
-        this.history = this.history.splice(length - this.nBackLevel - 1);
+      if (length > this.nBackLevel) {
+        this.history = this.history.slice(length - this.nBackLevel, length);
       }
+      console.log(JSON.stringify(this.history))
     }
   }
 };

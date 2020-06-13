@@ -48,8 +48,12 @@ export default {
             state.curPoints[0] += 1;
         }
     },
+    INCR_CORRECT_CLUES: function(state) {
+        state.correctClues++
+    },
     JUDGE_RESULTS: function(state) {
-        var tolleratedErrors = state.clues * state.minRate;
+        var tolleratedErrors = Math.round(state.correctClues * state.minRate);
+        console.log(state.curPoints , tolleratedErrors)
         var wrongPositions = state.curPoints[1] + state.curPoints[2];
         var wrongNumbers = state.curPoints[4] + state.curPoints[5];
         if (wrongPositions <= tolleratedErrors && wrongNumbers <= tolleratedErrors) {
@@ -63,6 +67,9 @@ export default {
             else
                 console.log('keep the level 1')
         }
+    },
+    INIT_GAMEPLAY: function (state) {
+        state.curPoints = [0, 0, 0, 0, 0, 0]
     }
 
 }

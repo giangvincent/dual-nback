@@ -1,20 +1,13 @@
 
 <template>
   <div id="game-pause" class="flex flex-col flex-wrap justify-center min-h-screen">
-    <div class="fixed w-screen h-screen flex content-center justify-center flex-wrap bg-white">
-      <div class="animate-level text-6xl">
-        <div>N</div>
-        <div>2</div>
+    <div class="fixed w-screen h-screen flex content-center justify-center flex-wrap bg-white" v-if="!animated">
+      <div class="animate-level h-56 w-56 text-5xl rounded-full">
+        <div class="pt-10 rounded-t-full text-white" style="background: #226089;">N</div>
+        <div class="pb-10 rounded-b-full" style="background: #30e3ca;" v-html="last_nlevel"></div>
       </div>
     </div>
-    <div class="flex absolute top-0 w-full h-16 text-white indicator-nav">
-      <div class="flex w-full justify-center relative content-center flex-wrap">
-        <router-link class="router-link-active absolute left-0 h-full pl-2 flex content-center flex-wrap" to="/">
-          <img class="w-8" src="../assets/images/back-btn.png" />
-        </router-link>
-        <div class>n = 1</div>
-      </div>
-    </div>
+    <navigator :nlevel="nBackLevel"></navigator>
     <div class="flex flex-wrap justify-center mx-6 p-2 rounded-lg border-gray-700 border-2 ">
       <div class="w-1/2 flex flex-col">
         <div class="w-full flex content-center justify-center py-2" v-for="(point, index) in displayFirstCol()" v-bind:key="index" >
@@ -44,15 +37,16 @@
     <div class="mx-auto">
       <div class="progress">
         <div class="my-2">You done a good job!</div>
-        <div class="mb-2">n = 2</div>
+        <div class="mb-2" v-html="`n = ${nBackLevel}`"></div>
       </div>
-      <div class="p-4 rounded-lg bg-gray-400">
-        <div class="mx-auto flex p-4 w-20 rounded-full bg-black">
-          <img src="../assets/images/replay.png" class="w-10 ml-2"/>
+      <router-link to="play">
+        <div class="p-4 rounded-lg bg-gray-400">
+          <div class="mx-auto flex p-4 w-20 rounded-full bg-black">
+            <img src="@/assets/images/replay.png" class="w-10 ml-2"/>
+          </div>
+          <div class="mt-1 text-2xl uppercase text-green-700">Keep playing</div>
         </div>
-        <div class="mt-1 text-2xl uppercase text-green-700">Keep playing</div>
-      </div>
-      
+      </router-link>
     </div>
     <!-- summary -->
   </div>
@@ -61,16 +55,21 @@
 <script>
 /* eslint-disable no-console */
 import { mapState, mapActions, mapMutations } from "vuex";
+import Navigator from "../components/Navigator"
 import FacebookIcon from "../components/icons/facebook_icon"
 import SidViewIcon from "../components/icons/sid_view"
 import NumberIcon from "../components/icons/number"
 
 export default {
-  name: "game-over",
+  name: "game-pause",
   data() {
-    return {};
+    return {
+      last_nlevel: 0,
+      animated: false
+    };
   },
   components: {
+    Navigator: Navigator,
     FacebookIcon: FacebookIcon,
     SidViewIcon: SidViewIcon,
     NumberIcon: NumberIcon
@@ -88,6 +87,16 @@ export default {
     console.log("start to judge");
 
     console.log("animate to determine the n level");
+    this.last_nlevel = this.nBackLevel
+    this.JUDGE_RESULTS();
+    setTimeout(() => {
+      this.last_nlevel = this.nBackLevel
+      console.log(this.nBackLevel)
+    }, 1000);
+    setTimeout(() => {
+      this.animated = true
+      console.log(this.nBackLevel)
+    }, 2000);
   },
   methods: {
     ...mapMutations(["JUDGE_RESULTS"]),
