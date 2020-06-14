@@ -75,7 +75,7 @@ export default {
       number: false,
       position: false
     };
-    // this.pushToHistory();
+    this.pushToHistory();
     
     this.engine = setInterval(this.createSelection, this.interval);
   },
@@ -87,7 +87,8 @@ export default {
       "SET_MISSED_POINT",
       "SET_WRONG_POINT",
       "SET_RIGHT_POINT",
-      "INCR_CORRECT_CLUES"
+      "INCR_CORRECT_CLUES",
+      "RESET_POINTS"
     ]),
     ...mapActions([]),
     async createSelection() {
@@ -96,7 +97,9 @@ export default {
       this.hideSelection();
       var self = this
       this.checkDisplayedClues().then(() => {
-        setTimeout(self.showSelection, self.clueFadeOutTime);
+        if (this.displayedClues < this.clues) {
+          setTimeout(self.showSelection, self.clueFadeOutTime);
+        }
       });
     },
     checkDisplayedClues() {
@@ -129,7 +132,7 @@ export default {
       
     },
     checkForPenalty() {
-      if (this.history.length < this.nBackLevel) {
+      if (this.history.length < this.nBackLevel + 1) {
         return 0;
       }
       if (this.tries.number === false && this.checkNumber()) {
@@ -179,12 +182,12 @@ export default {
       const length = this.history.length;
       return (
         this.selectedNumber ===
-        this.history[length - this.nBackLevel].number
+        this.history[length - this.nBackLevel - 1].number
       );
     },
     checkPosition() {
       const length = this.history.length;
-      const target = this.history[length - this.nBackLevel];
+      const target = this.history[length - this.nBackLevel - 1];
       return (
         this.selectedColumn === target.column && this.selectedRow === target.row
       );
@@ -197,9 +200,9 @@ export default {
       });
       const length = this.history.length;
       if (length > this.nBackLevel) {
-        this.history = this.history.slice(length - this.nBackLevel, length);
+        this.history = this.history.slice(length - this.nBackLevel - 1, length);
       }
-      console.log(JSON.stringify(this.history))
+      // console.log(JSON.stringify(this.history))
     }
   }
 };

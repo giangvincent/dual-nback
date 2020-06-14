@@ -81,6 +81,7 @@ export default {
     })
   },
   mounted() {
+
     clearInterval(this.engine);
     console.log("start to show curren point.");
 
@@ -89,17 +90,20 @@ export default {
     console.log("animate to determine the n level");
     this.last_nlevel = this.nBackLevel
     this.JUDGE_RESULTS();
+    var self = this
     setTimeout(() => {
-      this.last_nlevel = this.nBackLevel
-      console.log(this.nBackLevel)
+      self.last_nlevel = self.nBackLevel
+      console.log(self.nBackLevel)
+      self.RESET_POINTS()
     }, 1000);
     setTimeout(() => {
-      this.animated = true
-      console.log(this.nBackLevel)
+      self.animated = true
+      console.log(self.nBackLevel)
     }, 2000);
+    this.SET_CURSCENE("game-pause")
   },
   methods: {
-    ...mapMutations(["JUDGE_RESULTS"]),
+    ...mapMutations(["JUDGE_RESULTS", "RESET_POINTS", "SET_CURSCENE"]),
     ...mapActions([]),
     displayFirstCol() {
       return this.curPoints.slice(0,3);

@@ -22,14 +22,15 @@ export default {
             type: "position_number",
             level: "normal"
         },
-        minRate: 0.2,
+        minRate: 0.5,
         wowClass: false,
         correctClues: 0,
         n_level: 1,
         playSounds: [],
         stimuliNumber: 1,
         time: 2000,
-        clues: 10
+        clues: 10,
+        curScene: null
     },
     mutations: mutations,
     actions: actions,

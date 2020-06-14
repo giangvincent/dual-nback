@@ -52,8 +52,11 @@ export default {
         state.correctClues++
     },
     JUDGE_RESULTS: function(state) {
-        var tolleratedErrors = Math.round(state.correctClues * state.minRate);
-        console.log(state.curPoints , tolleratedErrors)
+        if (state.curScene === 'game-pause') {
+            return 0
+        }
+        var tolleratedErrors = state.correctClues * state.minRate;
+        // console.log(state.curPoints , tolleratedErrors)
         var wrongPositions = state.curPoints[1] + state.curPoints[2];
         var wrongNumbers = state.curPoints[4] + state.curPoints[5];
         if (wrongPositions <= tolleratedErrors && wrongNumbers <= tolleratedErrors) {
@@ -68,7 +71,10 @@ export default {
                 console.log('keep the level 1')
         }
     },
-    INIT_GAMEPLAY: function (state) {
+    SET_CURSCENE: function(state, payload) {
+        state.curScene = payload
+    },
+    RESET_POINTS: function (state) {
         state.curPoints = [0, 0, 0, 0, 0, 0]
     }
 
