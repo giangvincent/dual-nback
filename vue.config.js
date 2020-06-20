@@ -1,9 +1,4 @@
-const PurgecssPlugin = require("purgecss-webpack-plugin");
-const glob = require("glob-all");
-const path = require("path");
-
 module.exports = {
-    baseUrl: './',
     pluginOptions: {
         i18n: {
             locale: 'en',
@@ -15,6 +10,7 @@ module.exports = {
             https: true,
             port: 8000
         },
+        publicPath: "./",
         productionSourceMap: false
     }
 }
