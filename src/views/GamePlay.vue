@@ -202,7 +202,7 @@ export default {
       if (length > this.nBackLevel) {
         this.history = this.history.slice(length - this.nBackLevel - 1, length);
       }
-      // console.log(JSON.stringify(this.history))
+      console.log(JSON.stringify(this.history))
     }
   }
 };

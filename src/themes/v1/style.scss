@@ -23,7 +23,7 @@
 @include font('Baloo', '../../assets/fonts/Baloo2-SemiBold.ttf', 700, 'bold');
 
 body {
-  background-color: #ffffff;
+  background-color: #f0f0f0;
 }
 #app {
   font-family: 'Baloo', Helvetica, Arial, sans-serif;
@@ -40,7 +40,7 @@ body {
   -o-user-select:none;
 }
 .indicator-nav {
-  background: #f0f0f0;
+  background: #364f6b;
 }
 .btn-3d {
   box-shadow: 0 .2em #18acb7; 

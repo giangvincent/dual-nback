@@ -52,11 +52,11 @@ export default {
         state.correctClues++
     },
     JUDGE_RESULTS: function(state) {
-        if (state.curScene === 'game-pause') {
+        /* if (state.curScene === 'game-pause') {
             return 0
-        }
+        } */
         var tolleratedErrors = state.correctClues * state.minRate;
-        // console.log(state.curPoints , tolleratedErrors)
+        console.log(state.curPoints , tolleratedErrors)
         var wrongPositions = state.curPoints[1] + state.curPoints[2];
         var wrongNumbers = state.curPoints[4] + state.curPoints[5];
         if (wrongPositions <= tolleratedErrors && wrongNumbers <= tolleratedErrors) {
