@@ -1,4 +1,6 @@
 module.exports = {
+    publicPath: "./",
+    productionSourceMap: false,
     pluginOptions: {
         i18n: {
             locale: 'en',
@@ -9,8 +11,6 @@ module.exports = {
         devServer: {
             https: true,
             port: 8000
-        },
-        publicPath: "./",
-        productionSourceMap: false
+        }
     }
 }
