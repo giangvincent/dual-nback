@@ -9,8 +9,9 @@
       </div>
     </div>
     <navigator :nlevel="nBackLevel"></navigator>
-    <div id="share-html" class="flex flex-wrap justify-center mt-20 mx-6 p-2 rounded-lg border-gray-700 border-2 ">
-        <div class="flex w-full justify-center">
+    <div class="mt-20 mx-6 p-2">
+      <div id="share-html" class="flex flex-wrap justify-center rounded-lg border-gray-700 border-2 ">
+        <div class="flex w-full justify-center mt-2">
           <canvas class="w-24 h-24 rounded-full" id="userPhoto"></canvas>
         </div>
         <div class="text-3xl flex w-full my-2 justify-center">
@@ -33,7 +34,12 @@
             <span class="mx-4">{{ point }}</span>
           </div>
         </div>
+        <div class="w-full uppercase text-xl text-center my-2">
+          You're done a good job!
+        </div>
+      </div>
     </div>
+      
     <div class="flex p-2 rounded-lg bg-blue-700 text-white flex-wrap mx-6 mt-4" @click="share()">
         <div class="flex mx-auto">
           <facebook-icon w="2rem" h="2rem" fill="#ffffff"></facebook-icon>
@@ -43,7 +49,7 @@
     <!-- summary current points -->
     <div class="mx-auto">
       <div class="progress">
-        <div class="my-2 uppercase text-xl">You done a good job!</div>
+        <div class="my-2 uppercase text-xl">Want to try again!</div>
         
       </div>
       <router-link to="play">
@@ -94,23 +100,12 @@ export default {
     })
   },
   mounted() {
-    var userPhotoCanvas = document.getElementById("userPhoto");
-    var contextUserPhoto = userPhotoCanvas.getContext("2d");
-    var userPhoto = new Image();
-    userPhoto.onload = function() {
-      contextUserPhoto.drawImage(this, 0, 0, userPhotoCanvas.width, userPhotoCanvas.height);
-      // call next step in your code here, f.ex: nextStep();
-    };
-    userPhoto.crossOrigin = "Anonymous";
-    userPhoto.src = this.user.photo;
+    
     clearInterval(this.engine);
-    console.log("start to show curren point.");
-    this.replaceAllSvg();
+    this.drawUserPhoto()
+    this.replaceAllSvg()
     console.log("Current points are: ", this.curPoints)
 
-    console.log("start to judge");
-
-    console.log("animate to determine the n level");
     this.last_nlevel = this.nBackLevel
     this.JUDGE_RESULTS();
     var self = this
@@ -127,12 +122,21 @@ export default {
   methods: {
     ...mapMutations(["JUDGE_RESULTS", "SET_CURSCENE"]),
     ...mapActions([]),
+    drawUserPhoto() {
+      var userPhotoCanvas = document.getElementById("userPhoto");
+      var contextUserPhoto = userPhotoCanvas.getContext("2d");
+      var userPhoto = new Image();
+      userPhoto.onload = function() {
+        contextUserPhoto.drawImage(this, 0, 0, userPhotoCanvas.width, userPhotoCanvas.height);
+        // call next step in your code here, f.ex: nextStep();
+      };
+      userPhoto.crossOrigin = "Anonymous";
+      userPhoto.src = this.user.photo;
+    },
     displayFirstCol() {
-      console.log(this.curPoints.slice(0,3))
       return this.curPoints.slice(0,3);
     },
     displaySecondCol() {
-      console.log(this.curPoints.slice(3,6))
       return this.curPoints.slice(3,6);
     },
     async share() {
@@ -153,21 +157,24 @@ export default {
     replaceAllSvg() {
       var svgs = document.querySelectorAll('svg');
       // var img = document.querySelector('img');
-
-
-      /* // get svg data
-      var xml = new XMLSerializer().serializeToString(svg);
-      // make it base64
-      var svg64 = btoa(xml);
-      var b64Start = 'data:image/svg+xml;base64,';
-      // prepend a "header"
-      var image64 = b64Start + svg64;
-      // set it as the source of the img element
-      img.onload = function() {
-        console.log('delete svg')
-        console.log(this)
-      };
-      img.src = image64; */
+      svgs.forEach(function(svg) {
+        var img = svg.previousSibling;
+        if(img) {
+          var canvas = img.previousSibling;
+          var xml = new XMLSerializer().serializeToString(svg);
+          var svg64 = btoa(xml);
+          var b64Start = 'data:image/svg+xml;base64,';
+          var image64 = b64Start + svg64;
+          img.onload = function() {
+            canvas.getContext('2d').drawImage(img, 0, 0);
+            // svg.parentNode.removeChild(svg);
+            svg.style.display = 'none';
+            img.style.display = 'none'
+          };
+          img.setAttribute("src", image64);
+        }
+        
+      })
     }
   }
 };

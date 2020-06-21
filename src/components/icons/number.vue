@@ -1,6 +1,7 @@
 <template>
   <div class="flex">
-    <img :height="h" :width="w"/>
+    <canvas :height="h_pixel" :width="w_pixel"></canvas>
+    <img :height="h_pixel" :width="w_pixel"/>
     <svg
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
@@ -8,8 +9,8 @@
       viewBox="0 0 512 512"
       x="0px"
       y="0px"
-      :height="h"
-      :width="w"
+      :height="h_pixel"
+      :width="w_pixel"
       style="enable-background:new 0 0 512 512;"
       xml:space="preserve"
       
@@ -108,18 +109,13 @@ export default {
         fill: String,
         text: String
     },
-    mounted() {
-      var svg = document.querySelector('svg');
-      var img = document.querySelector('img');
-      // get svg data
-      var xml = new XMLSerializer().serializeToString(svg);
-      // make it base64
-      var svg64 = btoa(xml);
-      var b64Start = 'data:image/svg+xml;base64,';
-      // prepend a "header"
-      var image64 = b64Start + svg64;
-      // set it as the source of the img element
-      img.src = image64;
+    computed: {
+      h_pixel() {
+        return parseFloat(this.h.replace("rem","")) * 16
+      },
+      w_pixel() {
+        return parseFloat(this.w.replace("rem","")) * 16
+      }
     }
 }
 </script>

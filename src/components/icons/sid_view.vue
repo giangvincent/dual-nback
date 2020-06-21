@@ -1,12 +1,13 @@
 <template>
   <div class="flex">
-    <img :height="h" :width="w" src=""/>
+    <canvas :height="h_pixel" :width="w_pixel"></canvas>
+    <img :height="h_pixel" :width="w_pixel" src=""/>
     <svg
 
       enable-background="new 0 0 510 510"
       viewBox="0 0 510 510"
-      :height="h"
-      :width="w"
+      :height="h_pixel"
+      :width="w_pixel"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
@@ -55,6 +56,14 @@ export default {
     h: String,
     fill: String,
     text: String
-  }
+  },
+  computed: {
+      h_pixel() {
+        return parseFloat(this.h.replace("rem","")) * 16
+      },
+      w_pixel() {
+        return parseFloat(this.w.replace("rem","")) * 16
+      }
+    }
 }
 </script>
