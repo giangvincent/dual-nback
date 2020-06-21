@@ -7,6 +7,11 @@ import store from './store/'
 import i18n from './i18n'
 
 Vue.config.productionTip = false
+Vue.config.errorHandler = function(err, vm, info) {
+  console.error("[Global Error Handler]: Error in " + info + ": " + err);
+  // eslint-disable-next-line
+  // ga && ga("send", "event", "error-global", "Error in " + info + ": " + err);
+};
 const assets = [
   '@/assets/images/logo.png',
   '@/assets/images/home-area.png',
@@ -41,7 +46,7 @@ function onStart() {
     entryPointData: FBInstant.getEntryPointData()
   }
   store.commit("UPDATE_INFO", userInfo)
-  console.log(store.state.user.info)
+  // console.log(store.state.user.info)
   new Vue({
     router,
     store,

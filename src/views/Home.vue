@@ -13,7 +13,7 @@
     </div>
 
     <div class="flex flex-col m-4 sm:m-10">
-      <a class="font-bold py-2 px-4 mb-4 w-full btn-3d rounded border-2 uppercase text-xl" :class="{'btn-3d-active': redirectState === 'settings'}" @click="redirectTo('settings')">Settings</a>
+      <a class="font-bold py-2 px-4 mb-4 w-full btn-3d rounded border-2 uppercase text-xl" :class="{'btn-3d-active': redirectState === 'settings'}" @click="redirectTo('setting')">Settings</a>
       <a class="font-bold py-2 px-4 mb-4 w-full btn-3d rounded border-2 uppercase text-xl" :class="{'btn-3d-active': redirectState === 'leader-board'}" @click="redirectTo('leader-board')">Leaders board</a>
       <a class="font-bold py-2 px-4 mb-4 w-full btn-3d rounded border-2 uppercase text-xl" :class="{'btn-3d-active': redirectState === 'tutorials'}"  @click="redirectTo('tutorials')">Tutorials</a>
     </div>
@@ -48,7 +48,7 @@ export default {
     ...mapMutations([]),
     redirectTo (route) {
       this.redirectState = route
-      setTimeout(this.$router.push(route), 0.5);
+      this.$router.push(route)
     }
   }
 };
