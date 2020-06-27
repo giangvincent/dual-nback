@@ -13,14 +13,14 @@
     </div>
 
     <div class="flex flex-col m-4 sm:m-10">
-      <a class="font-bold py-2 px-4 mb-4 w-full btn-3d rounded border-2 uppercase text-xl" :class="{'btn-3d-active': redirectState === 'settings'}" @click="redirectTo('setting')">Settings</a>
-      <a class="font-bold py-2 px-4 mb-4 w-full btn-3d rounded border-2 uppercase text-xl" :class="{'btn-3d-active': redirectState === 'leader-board'}" @click="redirectTo('leader-board')">Leaders board</a>
-      <a class="font-bold py-2 px-4 mb-4 w-full btn-3d rounded border-2 uppercase text-xl" :class="{'btn-3d-active': redirectState === 'tutorials'}"  @click="redirectTo('tutorials')">Tutorials</a>
+      <a class="font-bold py-2 px-4 mb-4 w-full btn-3d rounded border-2 uppercase text-xl" :class="{'btn-3d-active': redirectState === 'settings'}" @click="redirectTo('setting')">{{ $t("home.setting") }}</a>
+      <a class="font-bold py-2 px-4 mb-4 w-full btn-3d rounded border-2 uppercase text-xl" :class="{'btn-3d-active': redirectState === 'leader-board'}" @click="redirectTo('leader-board')">{{ $t("home.leaderBoard") }}</a>
+      <a class="font-bold py-2 px-4 mb-4 w-full btn-3d rounded border-2 uppercase text-xl" :class="{'btn-3d-active': redirectState === 'tutorials'}"  @click="redirectTo('tutorial')">{{ $t("home.tutorial") }}</a>
     </div>
 
     <footer class="flex flex-row justify-center flex-wrap mb-2 italic">
-      <a class="px-2 link-active">Policies</a>
-      <a class="px-2 link-active">Terms</a>
+      <a class="px-2 link-active">{{$t("home.policies")}}</a>
+      <a class="px-2 link-active">{{$t("home.terms")}}</a>
     </footer>
   </div>
 </template>

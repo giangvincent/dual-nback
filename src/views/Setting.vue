@@ -1,28 +1,47 @@
 <template>
   <div id="setting">
     <navigator :nlevel="nBackLevel"></navigator>
-    <div class="mt-20 mx-6 ">
+    <div class="mt-20 mx-6">
       <div class="flex flex-wrap justify-center rounded-lg border-gray-700 border-2 p-2">
-        <div class="inline-block relative w-64">
-          <select
-            class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
-          >
-            <option>Really long option that will likely overlap the chevron</option>
-            <option>Option 2</option>
-            <option>Option 3</option>
-          </select>
-          <div
-            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
-          >
-            <svg
-              class="fill-current h-4 w-4"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-            >
-              <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-            </svg>
+        <div class="flex text-xl justify-between w-full py-2">
+          <div class="uppercase">{{ $t("settingText.sound") }}</div>
+          <div class="btn-status flex pt-1">
+            <span class="-mt-1 mr-1">
+              {{ (soundSetting) ? $t("settingText.enable"): $t("settingText.disable") }}
+            </span>
+            <input type="checkbox" name="soundSetting" id="soundSetting" v-bind="{soundSetting: 'checked'}" class="hidden checkbox" />
+            <label
+              for="soundSetting"
+              class="flex items-center p-1 rounded-lg w-12 h-6 cursor-pointer"
+              :class="{'btn-active': soundSetting, 'btn-change': !soundSetting}"
+              @click="TOGGLE_SOUND"
+            ></label>
           </div>
-        </div>
+        </div><!-- Sound setting -->
+        <div class="flex text-xl justify-between w-full py-2">
+          <div class="uppercase">{{ $t("settingText.music") }}</div>
+          <div class="btn-status flex pt-1">
+            <span class="-mt-1 mr-1">
+              {{ (musicSetting) ? $t("settingText.enable"): $t("settingText.disable") }}
+            </span>
+            <input type="checkbox" name="musicSetting" id="musicSetting" v-bind="{musicSetting: 'checked'}" class="hidden checkbox" />
+            <label
+              for="musicSetting"
+              class="flex items-center p-1 rounded-lg w-12 h-6 cursor-pointer"
+              :class="{'btn-active': musicSetting, 'btn-change': !musicSetting}"
+              @click="TOGGLE_MUSIC"
+            ></label>
+          </div>
+        </div><!-- Music setting -->
+        <div class="flex text-xl justify-between w-full py-2 relative">
+          <div class="uppercase">{{ $t("settingText.lang") }}</div>
+          <select class="block appearance-none bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline" v-model="locale_setting">
+            <option v-for="(langDisplay, langSymbol) in languageList" :key="langSymbol" :value="langSymbol">{{ langDisplay }}</option>
+          </select>
+          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+          </div>
+        </div><!-- Change locale -->
       </div>
     </div>
   </div>
@@ -31,19 +50,41 @@
 <script>
 /* eslint-disable no-undef */
 /* eslint-disable no-console */
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
 import Navigator from "../components/Navigator";
 
 export default {
   name: "Setting",
+  data() {
+    return {
+      locale_setting: 'en'
+    }
+  },
   components: {
     Navigator: Navigator
   },
   computed: {
     ...mapState({
       user: state => state.user.info,
-      nBackLevel: state => state.game.n_level
+      nBackLevel: state => state.game.n_level,
+      soundSetting: state => state.soundSetting,
+      musicSetting: state => state.musicSetting,
+      languageList: state => state.languageList,
+      locale: state => state.locale
     })
+  },
+  mounted() {
+    this.locale_setting = this.locale
+  },
+  watch: {
+    locale_setting: function(newVal, oldVal) {
+      if (newVal !== oldVal) {
+        this.SET_I18N(newVal)
+      }
+    }
+  },
+  methods: {
+    ...mapMutations(["TOGGLE_SOUND", "TOGGLE_MUSIC", "SET_I18N"])
   }
 };
 </script>

@@ -1,3 +1,17 @@
 {
-  "message": "hello i18n !!"
+  "message": "hello i18n !!",
+  "settingText": {
+    "sound": "Sound setting",
+    "music": "Music setting",
+    "lang": "Change Language",
+    "enable": "Enable",
+    "disable": "Disable"
+  },
+  "home": {
+    "setting": "Setting",
+    "leaderBoard": "Leader board",
+    "tutorial": "Tutorial",
+    "policies": "Policies",
+    "terms": "Terms"
+  }
 }

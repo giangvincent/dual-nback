@@ -1,0 +1,37 @@
+
+.checkbox:checked ~ .btn-change::before {
+  transition: 0.3s;
+  transform: translateX(0);
+}
+.checkbox:checked ~ .btn-active::before {
+    transition: 0.3s;
+    transform: translateX(23px);
+  }
+.btn-change {
+  background-color: #fed7d7;
+}
+
+.btn-change::before {
+  content: "";
+  display: block;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background-color: #e53e3e;
+  transition: 0.3s;
+  transform: translateX(0);
+}
+
+.btn-active {
+    background-color: #C6F6D5;
+}
+.btn-active:before {
+    content: "";
+    display: block;
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    transition: 0.3s;
+    transform: translateX(23px);
+    background-color: #38A169;
+}

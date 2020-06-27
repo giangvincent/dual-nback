@@ -26,7 +26,20 @@ export default {
         wowClass: false,
         correctClues: 0,
         n_level: 1,
-        playSounds: [],
+        sounds: [
+            "clickBtn.mp3",
+            "number.mp3",
+            "possition.mp3",
+            "sound.mp3",
+            "upLevel.mp3",
+            "downLevel.mp3",
+            "keepLevel.mp3"
+        ],
+        musics: [
+            "home.mp3",
+            "play.mp3",
+            "pause.mp3"
+        ],
         stimuliNumber: 1,
         time: 2000,
         clues: 10,

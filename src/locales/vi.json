@@ -1,0 +1,17 @@
+{
+    "messages": "Cùng nhau rèn luyện nào.",
+    "settingText": {
+        "sound": "Âm thanh",
+        "music": "Âm nhạc",
+        "lang": "Thay đổi ngôn ngữ",
+        "enable": "Bật",
+        "disable": "Tắt"
+    },
+  "home": {
+    "setting": "Cài đặt",
+    "leaderBoard": "Bảng xếp hạng",
+    "tutorial": "Hướng dẫn",
+    "policies": "Chính sách",
+    "terms": "Điều khoản"
+  }
+}

@@ -25,6 +25,16 @@ export default new Router({
       path: '/setting',
       name: 'setting',
       component: () => import('./views/Setting.vue')
+    },
+    {
+      path: '/tutorial',
+      name: 'tutorial',
+      component: () => import('./views/Tutorial.vue')
+    },
+    {
+      path: '/leader-board',
+      name: 'leader-board',
+      component: () => import('./views/LeaderBoard.vue')
     }
     /* {
       path: '/about',
