@@ -1,7 +1,8 @@
+
 <template>
   <div id="home">
     <div class="flex">
-      <img class="m-auto pt-4 px-4 pb-3" src="@/assets/images/logo.png" alt="logo" />
+      <img class="m-auto pt-4 px-4" src="@/assets/images/logo.png" alt="logo" />
     </div>
     <!-- game logo -->
 
@@ -26,7 +27,7 @@
 </template>
 
 <script>
-// TODO: ADD settings
+/* eslint-disable no-undef */
 import { mapState, mapActions, mapMutations } from 'vuex'
 
 export default {
@@ -39,6 +40,20 @@ export default {
   },
   mounted: function() {
     clearInterval(this.engine);
+    FBInstant.player.canSubscribeBotAsync().then(
+      can_subscribe => {
+        if(can_subscribe) {
+            FBInstant.player.subscribeBotAsync().then(
+              // Player is subscribed to the bot
+            ).catch(function (e) {
+              // Handle subscription failure
+              console.log(e)
+            });
+        }
+      }
+    );
+    
+
   },
   computed: {
     ...mapState({})

@@ -3,7 +3,7 @@
     "settingText": {
         "sound": "Âm thanh",
         "music": "Âm nhạc",
-        "lang": "Thay đổi ngôn ngữ",
+        "lang": "Ngôn ngữ",
         "enable": "Bật",
         "disable": "Tắt"
     },
@@ -13,5 +13,16 @@
     "tutorial": "Hướng dẫn",
     "policies": "Chính sách",
     "terms": "Điều khoản"
-  }
+  },
+  "typeList": [
+    "Position + Number",
+    "Position + Sound",
+    "Number + Sound"
+  ],
+  "levelList": [
+    "Easy",
+    "Normal",
+    "Hard",
+    "Very Hard"
+  ]
 }

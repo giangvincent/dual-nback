@@ -50,7 +50,7 @@
 <script>
 /* eslint-disable no-undef */
 /* eslint-disable no-console */
-import { mapState, mapMutations } from "vuex";
+import { mapState, mapMutations, mapActions } from "vuex";
 import Navigator from "../components/Navigator";
 
 export default {
@@ -84,7 +84,8 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(["TOGGLE_SOUND", "TOGGLE_MUSIC", "SET_I18N"])
+    ...mapMutations(["SET_I18N"]),
+    ...mapActions(["TOGGLE_SOUND", "TOGGLE_MUSIC"])
   }
 };
 </script>

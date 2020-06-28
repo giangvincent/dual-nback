@@ -10,5 +10,11 @@ export default {
         state.info.photo = payload.info
         state.info.context = payload.context
         state.info.id = payload.id
+    },
+    SET_LASTNLEVEL(state, payload) {
+        state.info.lastNLevel = payload
+    },
+    SET_LASTPOINTS(state, payload) {
+        state.info.lastPoints = payload
     }
 }

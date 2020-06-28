@@ -3,7 +3,7 @@
   "settingText": {
     "sound": "Sound setting",
     "music": "Music setting",
-    "lang": "Change Language",
+    "lang": "Language",
     "enable": "Enable",
     "disable": "Disable"
   },
@@ -13,5 +13,16 @@
     "tutorial": "Tutorial",
     "policies": "Policies",
     "terms": "Terms"
-  }
+  },
+  "typeList": [
+    "Position + Number",
+    "Position + Sound",
+    "Number + Sound"
+  ],
+  "levelList": [
+    "Easy",
+    "Normal",
+    "Hard",
+    "Very Hard"
+  ]
 }

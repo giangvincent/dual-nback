@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /**
  * Mutations for common change of game
  *  
@@ -5,11 +6,11 @@
 import i18n from '../i18n'
 
 export default {
-    TOGGLE_SOUND(state) {
-        state.soundSetting = !state.soundSetting
+    SET_SOUND_SETTING(state, payload) {
+        state.soundSetting = payload
     },
-    TOGGLE_MUSIC(state) {
-        state.musicSetting = !state.musicSetting
+    SET_MUSIC_SETTING(state, payload) {
+        state.musicSetting = payload
     },
     SET_I18N(state, payload) {
         if (state.languageList.hasOwnProperty(payload)) {

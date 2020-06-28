@@ -1,6 +1,6 @@
 
 <template>
-  <div id="game-pause" class="flex flex-col flex-wrap justify-center min-h-screen mb-10">
+  <div id="game-pause" class="flex flex-col flex-wrap min-h-screen pb-10">
     <loading v-if="loading"></loading>
     <div class="fixed w-screen h-screen flex content-center justify-center flex-wrap bg-white z-10" v-if="!animated">
       <div class="animate-level h-56 w-56 text-5xl rounded-full">
@@ -104,24 +104,42 @@ export default {
     clearInterval(this.engine);
     this.drawUserPhoto()
     this.replaceAllSvg()
-    console.log("Current points are: ", this.curPoints)
+    // console.log("Current points are: ", this.curPoints)
 
     this.last_nlevel = this.nBackLevel
     this.JUDGE_RESULTS();
     var self = this
     setTimeout(() => {
       self.last_nlevel = self.nBackLevel
-      console.log(self.nBackLevel)
+      // console.log(self.nBackLevel)
+      self.submitScore()
     }, 1000);
     setTimeout(() => {
       self.animated = true
-      console.log(self.nBackLevel)
+      // console.log(self.nBackLevel)
     }, 2000);
     this.SET_CURSCENE("game-pause")
   },
   methods: {
     ...mapMutations(["JUDGE_RESULTS", "SET_CURSCENE"]),
     ...mapActions([]),
+    submitScore() {
+      var self = this
+      if (this.nBackLevel > this.use.lastNLevel) {
+        // store.commit("setHighestScore", this.score);
+        FBInstant.getLeaderboardAsync("dual_nback_leaderboard")
+          .then(leaderboard => {
+            console.log(leaderboard.getName());
+            return leaderboard.setScoreAsync(self.nBackLevel);
+          })
+          .then(() => console.log("Score saved"))
+          .catch(error => console.error(error));
+      }
+      FBInstant.player.setDataAsync({
+        lastNLevel: this.nBackLevel, 
+        lastPoints: this.curPoints
+      })
+    },
     drawUserPhoto() {
       var userPhotoCanvas = document.getElementById("userPhoto");
       var contextUserPhoto = userPhotoCanvas.getContext("2d");

@@ -46,6 +46,21 @@ function onStart() {
     entryPointData: FBInstant.getEntryPointData()
   }
   store.commit("UPDATE_INFO", userInfo)
+  store.commit("SET_I18N", FBInstant.getLocale())
+  FBInstant.player
+  .getDataAsync([
+    'soundSetting', 
+    'musicSetting',
+    'lastNLevel',
+    'lastPoints'
+  ])
+  .then(function(data) {
+    console.log(data)
+    store.commit("SET_SOUND_SETTING", data['soundSetting'])
+    store.commit("SET_MUSIC_SETTING", data['musicSetting'])
+    store.commit("SET_LASTNLEVEL", data['lastNLevel'])
+    store.commit("SET_LASTPOINTS", data['lastPoints'])
+  });
   // console.log(store.state.user.info)
   new Vue({
     router,

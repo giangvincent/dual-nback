@@ -20,7 +20,18 @@ export default {
         ] */
         game: {
             type: "position_number",
-            level: "normal"
+            level: "normal",
+            typeList: [
+                "position_number",
+                "position_sound",
+                "number_sound"
+            ],
+            levelList: [
+                "easy",
+                "normal",
+                "hard",
+                "very-hard"
+            ]
         },
         minRate: 0.5,
         wowClass: false,

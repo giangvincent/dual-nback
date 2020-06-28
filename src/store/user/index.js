@@ -13,9 +13,8 @@ export default {
             name: "Player name",
             locale: "vi",
             photo: "",
-            lastScore: 0,
-            score: 0,
-            lastPlay: 0
+            lastNLevel: 1,
+            lastPoints: [0, 0, 0, 0, 0, 0]
         },
         friends : {
     
