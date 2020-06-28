@@ -6,7 +6,7 @@
         <div class="flex text-xl justify-between w-full py-2">
           <div class="uppercase">{{ $t("settingText.sound") }}</div>
           <div class="btn-status flex pt-1">
-            <span class="-mt-1 mr-1">
+            <span class="-mt-1 mr-1"  :class="{'text-red-600': !soundSetting, 'text-green-600': soundSetting}">
               {{ (soundSetting) ? $t("settingText.enable"): $t("settingText.disable") }}
             </span>
             <input type="checkbox" name="soundSetting" id="soundSetting" v-bind="{soundSetting: 'checked'}" class="hidden checkbox" />
@@ -21,7 +21,7 @@
         <div class="flex text-xl justify-between w-full py-2">
           <div class="uppercase">{{ $t("settingText.music") }}</div>
           <div class="btn-status flex pt-1">
-            <span class="-mt-1 mr-1">
+            <span class="-mt-1 mr-1" :class="{'text-red-600': !musicSetting, 'text-green-600': musicSetting}">
               {{ (musicSetting) ? $t("settingText.enable"): $t("settingText.disable") }}
             </span>
             <input type="checkbox" name="musicSetting" id="musicSetting" v-bind="{musicSetting: 'checked'}" class="hidden checkbox" />
@@ -42,6 +42,15 @@
             <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
           </div>
         </div><!-- Change locale -->
+        <div class="flex text-xl justify-between w-full py-2 relative">
+          <div class="uppercase">{{ $t("gameType") }}</div>
+          <select class="block appearance-none bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline w-40" v-model="gameTypeSetting">
+            <option v-for="(game_type, index) in gameTypeList" :key="`game_type-${index}`" :value="game_type">{{ $t("typeList")[index] }}</option>
+          </select>
+          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+          </div>
+        </div><!-- Change game typelist -->
       </div>
     </div>
   </div>
@@ -57,7 +66,8 @@ export default {
   name: "Setting",
   data() {
     return {
-      locale_setting: 'en'
+      locale_setting: 'en',
+      gameTypeSetting: "position_number"
     }
   },
   components: {
@@ -70,22 +80,30 @@ export default {
       soundSetting: state => state.soundSetting,
       musicSetting: state => state.musicSetting,
       languageList: state => state.languageList,
-      locale: state => state.locale
+      locale: state => state.locale,
+      gameType: state => state.game.setting.type,
+      gameTypeList: state => state.game.setting.typeList
     })
   },
   mounted() {
     this.locale_setting = this.locale
+    this.gameTypeSetting = this.gameType
   },
   watch: {
     locale_setting: function(newVal, oldVal) {
       if (newVal !== oldVal) {
         this.SET_I18N(newVal)
       }
+    },
+    gameTypeSetting: function(newVal, oldVal) {
+      if (newVal !== oldVal) {
+        this.CHANGE_GAMETYPE(newVal)
+      }
     }
   },
   methods: {
-    ...mapMutations(["SET_I18N"]),
-    ...mapActions(["TOGGLE_SOUND", "TOGGLE_MUSIC"])
+    ...mapMutations(["SET_I18N", "SET_GAMETYPE"]),
+    ...mapActions(["TOGGLE_SOUND", "TOGGLE_MUSIC", "CHANGE_GAMETYPE"])
   }
 };
 </script>

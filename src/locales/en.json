@@ -14,10 +14,11 @@
     "policies": "Policies",
     "terms": "Terms"
   },
+  "gameType": "Game type",
   "typeList": [
-    "Position + Number",
-    "Position + Sound",
-    "Number + Sound"
+    "Position and Number",
+    "Position and Sound",
+    "Number and Sound"
   ],
   "levelList": [
     "Easy",

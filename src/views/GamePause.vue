@@ -73,6 +73,7 @@ import Navigator from "../components/Navigator"
 import FacebookIcon from "../components/icons/facebook_icon"
 import SidViewIcon from "../components/icons/sid_view"
 import NumberIcon from "../components/icons/number"
+import EarIcon from "../components/icons/ear"
 import Loading from "../components/Loading"
 import html2canvas from 'html2canvas';
 
@@ -90,6 +91,7 @@ export default {
     FacebookIcon: FacebookIcon,
     SidViewIcon: SidViewIcon,
     NumberIcon: NumberIcon,
+    EarIcon: EarIcon,
     Loading: Loading
   },
   computed: {
@@ -125,7 +127,7 @@ export default {
     ...mapActions([]),
     submitScore() {
       var self = this
-      if (this.nBackLevel > this.use.lastNLevel) {
+      if (this.nBackLevel > this.user.lastNLevel) {
         // store.commit("setHighestScore", this.score);
         FBInstant.getLeaderboardAsync("dual_nback_leaderboard")
           .then(leaderboard => {

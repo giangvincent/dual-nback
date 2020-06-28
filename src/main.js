@@ -52,7 +52,8 @@ function onStart() {
     'soundSetting', 
     'musicSetting',
     'lastNLevel',
-    'lastPoints'
+    'lastPoints',
+    'gameType'
   ])
   .then(function(data) {
     console.log(data)
@@ -60,6 +61,7 @@ function onStart() {
     store.commit("SET_MUSIC_SETTING", data['musicSetting'])
     store.commit("SET_LASTNLEVEL", data['lastNLevel'])
     store.commit("SET_LASTPOINTS", data['lastPoints'])
+    store.commit("SET_GAMETYPE", data['gameType'])
   });
   // console.log(store.state.user.info)
   new Vue({

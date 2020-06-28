@@ -14,15 +14,16 @@
     "policies": "Chính sách",
     "terms": "Điều khoản"
   },
+  "gameType": "Loại Game",
   "typeList": [
-    "Position + Number",
-    "Position + Sound",
-    "Number + Sound"
+    "Vị trí và Số",
+    "Vị trí và âm thanh",
+    "Số và âm thanh"
   ],
   "levelList": [
-    "Easy",
-    "Normal",
-    "Hard",
-    "Very Hard"
+    "Dễ",
+    "Bình thường",
+    "Khó",
+    "Rất khó"
   ]
 }

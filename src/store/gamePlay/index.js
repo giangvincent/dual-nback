@@ -18,7 +18,7 @@ export default {
             'missed number or sound' , 
             'wrong number or sound'
         ] */
-        game: {
+        setting: {
             type: "position_number",
             level: "normal",
             typeList: [
@@ -37,20 +37,21 @@ export default {
         wowClass: false,
         correctClues: 0,
         n_level: 1,
-        sounds: [
-            "clickBtn.mp3",
-            "number.mp3",
-            "possition.mp3",
-            "sound.mp3",
-            "upLevel.mp3",
-            "downLevel.mp3",
-            "keepLevel.mp3"
-        ],
-        musics: [
-            "home.mp3",
-            "play.mp3",
-            "pause.mp3"
-        ],
+        playSounds: [],
+        sounds: {
+            "clickBtn": null,
+            "number": null,
+            "possition": null,
+            "sound": null,
+            "upLevel": null,
+            "downLevel": null,
+            "keepLevel": null
+        },
+        musics: {
+            "home": null,
+            "play": null,
+            "pause": null
+        },
         stimuliNumber: 1,
         time: 2000,
         clues: 10,

@@ -6,6 +6,9 @@
 */
 
 export default {
+    SET_GAMETYPE: function(state, payload) {
+        state.setting["type"] = payload
+    },
     SET_WOWCLASS: function(state, payload) {
         state.wowClass = payload;
     },

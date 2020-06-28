@@ -41,6 +41,9 @@
 /* eslint-disable no-console */
 import { mapState, mapActions, mapMutations } from "vuex";
 import Navigator from "../components/Navigator"
+import SidViewIcon from "../components/icons/sid_view"
+import NumberIcon from "../components/icons/number"
+import EarIcon from "../components/icons/ear"
 
 export default {
   name: "game-play",
@@ -59,7 +62,10 @@ export default {
     };
   },
   components: {
-    Navigator: Navigator
+    Navigator: Navigator,
+    SidViewIcon: SidViewIcon,
+    NumberIcon: NumberIcon,
+    EarIcon: EarIcon,
   },
   computed: {
     ...mapState({
