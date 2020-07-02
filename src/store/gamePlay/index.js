@@ -6,6 +6,7 @@
 import mutations from "./mutations";
 import actions from "./actions";
 import getters from "./getters";
+import { Howl } from 'howler';
 
 export default {
     state: {
@@ -39,18 +40,14 @@ export default {
         n_level: 1,
         playSounds: [],
         sounds: {
-            "clickBtn": null,
-            "number": null,
-            "possition": null,
-            "sound": null,
-            "upLevel": null,
-            "downLevel": null,
-            "keepLevel": null
+            "clickBtn": new Howl({ src: ['assets/audios/clickBtn.mp3'] }),
+            "upLevel": new Howl({ src: ['assets/audios/levelUp.mp3'] }),
+            "downLevel": new Howl({ src: ['assets/audios/levelDown.mp3'] }),
+            "keepLevel": new Howl({ src: ['assets/audios/levelKeep.mp3'] })
         },
         musics: {
-            "home": null,
-            "play": null,
-            "pause": null
+            "home": new Howl({ src: ['assets/audios/home_music.mp3'] }),
+            "play": new Howl({ src: ['assets/audios/play_music.mp3'] })
         },
         stimuliNumber: 1,
         time: 2000,
