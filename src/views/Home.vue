@@ -1,4 +1,3 @@
-
 <template>
   <div id="home">
     <div class="flex">
@@ -27,6 +26,7 @@
 </template>
 
 <script>
+/* eslint-disable no-console */
 /* eslint-disable no-undef */
 import { mapState, mapActions, mapMutations } from 'vuex'
 
@@ -38,8 +38,23 @@ export default {
       redirectState: false
     }
   },
+  computed: {
+    ...mapState({
+      musicSetting: state => state.musicSetting,
+      homeMusic: state => state.music_home,
+      playMusicScene: state => state.music_play,
+      soundSetting: state => state.soundSetting,
+      clickBtn: state => state.sound_clickBtn
+    })
+  },
   mounted: function() {
     clearInterval(this.engine);
+    this.playMusicScene.stop()
+    this.homeMusic.stop();
+    this.homeMusic.play();
+    this.homeMusic.mute(!this.musicSetting);
+    this.homeMusic.loop(true);
+    this.homeMusic.volume(0.5)
     FBInstant.player.canSubscribeBotAsync().then(
       can_subscribe => {
         if(can_subscribe) {
@@ -52,16 +67,14 @@ export default {
         }
       }
     );
-    
-
-  },
-  computed: {
-    ...mapState({})
   },
   methods: {
     ...mapActions([]),
     ...mapMutations([]),
     redirectTo (route) {
+      this.clickBtn.play();
+      this.clickBtn.mute(!this.soundSetting);
+      
       this.redirectState = route
       this.$router.push(route)
     }

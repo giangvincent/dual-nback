@@ -9,7 +9,7 @@
       </div>
     </div>
     <navigator :nlevel="nBackLevel"></navigator>
-    <div class="mt-20 mx-6 p-2">
+    <div class="mt-20 sm:mx-6 p-2">
       <div id="share-html" class="flex flex-wrap justify-center rounded-lg border-gray-700 border-2 ">
         <div class="flex w-full justify-center mt-2">
           <canvas class="w-24 h-24 rounded-full" id="userPhoto"></canvas>
@@ -98,10 +98,19 @@ export default {
     ...mapState({
       user: state => state.user.info,
       curPoints: state => state.game.curPoints,
-      nBackLevel: state => state.game.n_level
+      nBackLevel: state => state.game.n_level,
+      musicSetting: state => state.musicSetting,
+      homeMusicScene: state => state.music_home,
+      playMusicScene: state => state.music_play,
+      soundSetting: state => state.soundSetting,
+      clickBtn: state => state.sound_clickBtn,
+      sound_upLevel: state => state.sound_upLevel,
+      sound_downLevel: state => state.sound_downLevel,
+      sound_keepLevel: state => state.sound_keepLevel
     })
   },
   mounted() {
+    this.playMusicScene.stop()
     
     clearInterval(this.engine);
     this.drawUserPhoto()
@@ -111,6 +120,21 @@ export default {
     this.last_nlevel = this.nBackLevel
     this.JUDGE_RESULTS();
     var self = this
+    if (self.nBackLevel > self.last_nlevel) {
+      this.sound_upLevel.play();
+      this.sound_upLevel.mute(!this.soundSetting);
+      console.log(this.sound_upLevel)
+    }
+    if (self.nBackLevel == self.last_nlevel) {
+      this.sound_keepLevel.play();
+      this.sound_keepLevel.mute(!this.soundSetting);
+      console.log(this.sound_keepLevel)
+    }
+    if (self.nBackLevel < self.last_nlevel) {
+      this.sound_downLevel.play();
+      this.sound_downLevel.mute(!this.soundSetting);
+      console.log(this.sound_downLevel)
+    }
     setTimeout(() => {
       self.last_nlevel = self.nBackLevel
       // console.log(self.nBackLevel)
@@ -119,12 +143,20 @@ export default {
     setTimeout(() => {
       self.animated = true
       // console.log(self.nBackLevel)
+      self.playMusic()
+      self.RESET_CURPOINTS()
     }, 2000);
     this.SET_CURSCENE("game-pause")
   },
   methods: {
-    ...mapMutations(["JUDGE_RESULTS", "SET_CURSCENE"]),
+    ...mapMutations(["JUDGE_RESULTS", "SET_CURSCENE", "RESET_CURPOINTS"]),
     ...mapActions([]),
+    playMusic() {
+      this.homeMusicScene.play();
+      this.homeMusicScene.mute(!this.musicSetting);
+      this.homeMusicScene.loop(true);
+      this.homeMusicScene.volume(0.5)
+    },
     submitScore() {
       var self = this
       if (this.nBackLevel > this.user.lastNLevel) {
@@ -160,6 +192,8 @@ export default {
       return this.curPoints.slice(3,6);
     },
     async share() {
+      this.clickBtn.play()
+      this.clickBtn.mute(!this.soundSetting)
       this.loading = true
       var self = this
       await html2canvas(document.getElementById("share-html")).then(function(canvas) {

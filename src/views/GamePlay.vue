@@ -1,4 +1,5 @@
 
+
 <template>
   <div id="game-play" class="flex flex-col content-center justify-center flex-wrap">
     <navigator :nlevel="nBackLevel"></navigator>
@@ -38,6 +39,7 @@
 </template>
 
 <script>
+/* eslint-disable vue/no-unused-components */
 /* eslint-disable no-console */
 import { mapState, mapActions, mapMutations } from "vuex";
 import Navigator from "../components/Navigator"
@@ -72,7 +74,12 @@ export default {
       nBackLevel: state => state.game.n_level,
       interval: state => state.game.time,
       clues: state => state.game.clues,
-      curPoints: state => state.game.curPoints
+      curPoints: state => state.game.curPoints,
+      musicSetting: state => state.musicSetting,
+      homeMusicScene: state => state.music_home,
+      playMusicScene: state => state.music_play,
+      soundSetting: state => state.soundSetting,
+      clickBtn: state => state.sound_clickBtn
     })
   },
   created() {
@@ -85,7 +92,16 @@ export default {
     
     this.engine = setInterval(this.createSelection, this.interval);
   },
-  mounted: function() {},
+  mounted: function() {
+    this.homeMusicScene.stop();
+    this.playMusicScene.play();
+    this.playMusicScene.mute(!this.musicSetting);
+    this.playMusicScene.loop(true);
+    this.playMusicScene.volume(0.5)
+    
+    this.clickBtn.play()
+    this.clickBtn.mute(!this.soundSetting)
+  },
 
   methods: {
     ...mapMutations([
@@ -159,6 +175,9 @@ export default {
       return randNumber > 9 ? 9 : randNumber
     },
     userSelectedNumber() {
+      this.clickBtn.play()
+      this.clickBtn.mute(!this.soundSetting)
+
       if (this.tries.number) {
         return;
       }
@@ -172,6 +191,9 @@ export default {
       }
     },
     userSelectedPosition() {
+      this.clickBtn.play()
+      this.clickBtn.mute(!this.soundSetting)
+
       if (this.tries.position) {
         return;
       }

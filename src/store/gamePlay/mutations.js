@@ -6,6 +6,9 @@
 */
 
 export default {
+    RESET_CURPOINTS: function(state) {
+        state.curPoints = [0, 0, 0, 0, 0, 0]
+    },
     SET_GAMETYPE: function(state, payload) {
         state.setting["type"] = payload
     },

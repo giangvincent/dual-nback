@@ -79,6 +79,7 @@ export default {
       nBackLevel: state => state.game.n_level,
       soundSetting: state => state.soundSetting,
       musicSetting: state => state.musicSetting,
+      homeMusic: state => state.music_home,
       languageList: state => state.languageList,
       locale: state => state.locale,
       gameType: state => state.game.setting.type,
@@ -98,6 +99,11 @@ export default {
     gameTypeSetting: function(newVal, oldVal) {
       if (newVal !== oldVal) {
         this.CHANGE_GAMETYPE(newVal)
+      }
+    },
+    musicSetting: function(newVal, oldVal)  {
+      if (newVal !== oldVal) {
+        this.homeMusic.mute(!this.musicSetting);
       }
     }
   },
