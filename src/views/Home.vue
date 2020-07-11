@@ -19,8 +19,8 @@
     </div>
 
     <footer class="flex flex-row justify-center flex-wrap mb-2 italic">
-      <a class="px-2 link-active">{{$t("home.policies")}}</a>
-      <a class="px-2 link-active">{{$t("home.terms")}}</a>
+      <a class="px-2 link-active" @click="redirectTo('')">{{$t("home.policies")}}</a>
+      <a class="px-2 link-active" @click="redirectTo('')">{{$t("home.terms")}}</a>
     </footer>
   </div>
 </template>
@@ -53,7 +53,6 @@ export default {
     this.homeMusic.stop();
     this.homeMusic.play();
     this.homeMusic.mute(!this.musicSetting);
-    this.homeMusic.loop(true);
     this.homeMusic.volume(0.5)
     FBInstant.player.canSubscribeBotAsync().then(
       can_subscribe => {
@@ -74,9 +73,12 @@ export default {
     redirectTo (route) {
       this.clickBtn.play();
       this.clickBtn.mute(!this.soundSetting);
-      
-      this.redirectState = route
-      this.$router.push(route)
+      this.clickBtn.loop(true)
+
+      if (route !== '') {
+        this.redirectState = route
+        this.$router.push(route)
+      }
     }
   }
 };

@@ -25,7 +25,6 @@ export default {
   mounted() {
     this.homeMusic.play();
     this.homeMusic.mute(!this.musicSetting);
-    this.homeMusic.loop(true);
     this.homeMusic.volume(0.5)
   }
 }

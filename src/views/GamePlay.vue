@@ -96,7 +96,6 @@ export default {
     this.homeMusicScene.stop();
     this.playMusicScene.play();
     this.playMusicScene.mute(!this.musicSetting);
-    this.playMusicScene.loop(true);
     this.playMusicScene.volume(0.5)
     
     this.clickBtn.play()
