@@ -79,7 +79,9 @@ export default {
       homeMusicScene: state => state.music_home,
       playMusicScene: state => state.music_play,
       soundSetting: state => state.soundSetting,
-      clickBtn: state => state.sound_clickBtn
+      clickBtn: state => state.sound_clickBtn,
+      gameTypeSetting: state => state.game.setting.typeList,
+      gameSounds: state => state.game.game_data.alphabet_sounds.en
     })
   },
   created() {
@@ -101,7 +103,7 @@ export default {
     this.clickBtn.play()
     this.clickBtn.mute(!this.soundSetting)
   },
-
+  watch: {},
   methods: {
     ...mapMutations([
       "SET_LASTPOINT",
@@ -109,7 +111,8 @@ export default {
       "SET_WRONG_POINT",
       "SET_RIGHT_POINT",
       "INCR_CORRECT_CLUES",
-      "RESET_POINTS"
+      "RESET_POINTS",
+      "CHANGE_GAMETYPE"
     ]),
     ...mapActions([]),
     async createSelection() {
@@ -135,6 +138,27 @@ export default {
         rej();
       })
     },
+    checkForPenalty() {
+      if (this.history.length < this.nBackLevel + 1) {
+        return 0;
+      }
+      if (this.tries.number === false && this.checkNumber()) {
+        this.SET_MISSED_POINT("number");
+        this.INCR_CORRECT_CLUES()
+      }
+      if (this.tries.position === false && this.checkPosition()) {
+        this.SET_MISSED_POINT("position");
+        this.INCR_CORRECT_CLUES()
+      }
+      return 0;
+    },
+    checkNumber() {
+      const length = this.history.length;
+      return (
+        this.selectedNumber ===
+        this.history[length - this.nBackLevel - 1].number
+      );
+    },
     hideSelection() {
       this.selectedColumn = null;
       this.selectedRow = null;
@@ -150,22 +174,8 @@ export default {
       this.selectedBtnNum = false;
       this.hidden = false;
       this.pushToHistory();
-      
     },
-    checkForPenalty() {
-      if (this.history.length < this.nBackLevel + 1) {
-        return 0;
-      }
-      if (this.tries.number === false && this.checkNumber()) {
-        this.SET_MISSED_POINT("number");
-        this.INCR_CORRECT_CLUES()
-      }
-      if (this.tries.position === false && this.checkPosition()) {
-        this.SET_MISSED_POINT("position");
-        this.INCR_CORRECT_CLUES()
-      }
-      return 0;
-    },
+    
     getRandomPosition() {
       return Math.floor(Math.random() * 3 + 1)
     },
@@ -205,13 +215,7 @@ export default {
         this.SET_WRONG_POINT("position");
       }
     },
-    checkNumber() {
-      const length = this.history.length;
-      return (
-        this.selectedNumber ===
-        this.history[length - this.nBackLevel - 1].number
-      );
-    },
+    
     checkPosition() {
       const length = this.history.length;
       const target = this.history[length - this.nBackLevel - 1];
