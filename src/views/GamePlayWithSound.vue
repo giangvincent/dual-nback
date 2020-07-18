@@ -48,7 +48,7 @@ import NumberIcon from "../components/icons/number"
 import EarIcon from "../components/icons/ear"
 
 export default {
-  name: "game-play",
+  name: "game-play-with-sound",
   data() {
     return {
       selectedBtnNum: false,
@@ -80,7 +80,8 @@ export default {
       playMusicScene: state => state.music_play,
       soundSetting: state => state.soundSetting,
       clickBtn: state => state.sound_clickBtn,
-      gameTypeSetting: state => state.game.setting.type
+      gameTypeSetting: state => state.game.setting.type,
+      gameSounds: state => state.game.game_data.alphabet_sounds.en
     })
   },
   created() {

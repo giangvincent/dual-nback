@@ -17,6 +17,11 @@ export default new Router({
       component: () => import('./views/GamePlay.vue')
     },
     {
+      path: '/play-with-sound',
+      name: 'play-with-sound',
+      component: () => import('./views/GamePlayWithSound.vue')
+    },
+    {
       path: '/game-pause',
       name: 'game-pause',
       component: () => import('./views/GamePause.vue')

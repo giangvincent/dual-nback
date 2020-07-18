@@ -7,7 +7,7 @@
 
     <div class="flex m-4 sm:m-10 mb-6 justify-center content-center flex-wrap">
       <img src="@/assets/images/home-area.png" alt="home-area" />
-      <router-link class="absolute p-10 w-48 h-48 rounded-full play-home-bg" to="play">
+      <router-link class="absolute p-10 w-48 h-48 rounded-full play-home-bg" v-bind:to="(gameType.indexOf('sound') < 0) ? 'play' : 'play-with-sound'">
         <img class="w-48" src="@/assets/images/triangle-radius.png" alt="play">
       </router-link>
     </div>
@@ -44,7 +44,8 @@ export default {
       homeMusic: state => state.music_home,
       playMusicScene: state => state.music_play,
       soundSetting: state => state.soundSetting,
-      clickBtn: state => state.sound_clickBtn
+      clickBtn: state => state.sound_clickBtn,
+      gameType: state => state.game.setting.type
     })
   },
   mounted: function() {

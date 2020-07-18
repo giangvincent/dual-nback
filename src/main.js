@@ -57,11 +57,15 @@ function onStart() {
   ])
   .then(function(data) {
     console.log(data)
-    store.commit("SET_SOUND_SETTING", data['soundSetting'])
-    store.commit("SET_MUSIC_SETTING", data['musicSetting'])
+    
     store.commit("SET_LASTNLEVEL", data['lastNLevel'])
     store.commit("SET_LASTPOINTS", data['lastPoints'])
     store.commit("SET_GAMETYPE", data['gameType'])
+    if (typeof data['gameType'] !== 'undefined' && data['gameType'].indexOf('sound') >= 0) {
+      store.commit("SET_SOUND_SETTING", true)
+    } else 
+      store.commit("SET_SOUND_SETTING", data['soundSetting'])
+    store.commit("SET_MUSIC_SETTING", data['musicSetting'])
   });
   // console.log(store.state.user.info)
   new Vue({

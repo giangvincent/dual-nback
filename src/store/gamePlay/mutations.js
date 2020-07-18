@@ -10,7 +10,9 @@ export default {
         state.curPoints = [0, 0, 0, 0, 0, 0]
     },
     SET_GAMETYPE: function(state, payload) {
-        state.setting["type"] = payload
+        if (state.setting.typeList.includes(payload)) {
+            state.setting.type = payload
+        }
     },
     SET_WOWCLASS: function(state, payload) {
         state.wowClass = payload;
