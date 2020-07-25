@@ -74,7 +74,7 @@ export default {
     redirectTo (route) {
       this.clickBtn.play();
       this.clickBtn.mute(!this.soundSetting);
-      this.clickBtn.loop(true)
+      this.clickBtn.loop(false)
 
       if (route !== '') {
         this.redirectState = route

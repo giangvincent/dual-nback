@@ -28,12 +28,20 @@
         @click="userSelectedPosition"
         class="btn-3d rounded border-2 uppercase text-xl py-2 px-4 rounded"
         :class="{'btn-3d-active': selectedBtnPos}"
+        v-if="gameTypeSetting !== 'number_sound'"
       >← Position</button>
       <button
         @click="userSelectedNumber"
         class="btn-3d rounded border-2 uppercase text-xl py-2 px-4 rounded"
         :class="{'btn-3d-active': selectedBtnNum}"
+        v-if="gameTypeSetting !== 'position_sound'"
       >Number →</button>
+      <button
+        @click="userSelectedNumber"
+        class="btn-3d rounded border-2 uppercase text-xl py-2 px-4 rounded"
+        :class="{'btn-3d-active': selectedBtnNum}"
+        v-if="gameTypeSetting !== 'position_number'"
+      >Sound →</button>
     </div>
   </div>
 </template>
@@ -52,6 +60,7 @@ export default {
   data() {
     return {
       selectedBtnNum: false,
+      selectedBtnSound: false,
       selectedBtnPos: false,
       clueFadeOutTime: 400,
       columns: 3,
@@ -59,6 +68,7 @@ export default {
       selectedRow: null,
       selectedColumn: null,
       selectedNumber: null,
+      selectedSound: null,
       hidden: false,
       displayedClues: 0
     };
@@ -72,7 +82,7 @@ export default {
   computed: {
     ...mapState({
       nBackLevel: state => state.game.n_level,
-      interval: state => state.game.time,
+      intervalTime: state => state.game.time,
       clues: state => state.game.clues,
       curPoints: state => state.game.curPoints,
       musicSetting: state => state.musicSetting,
@@ -80,7 +90,8 @@ export default {
       playMusicScene: state => state.music_play,
       soundSetting: state => state.soundSetting,
       clickBtn: state => state.sound_clickBtn,
-      gameTypeSetting: state => state.game.setting.type
+      gameTypeSetting: state => state.game.setting.type,
+      gameplay_playlist: state => state.game.game_data.alphabet_sounds.en
     })
   },
   created() {
@@ -91,16 +102,16 @@ export default {
     };
     this.pushToHistory();
     
-    this.engine = setInterval(this.createSelection, this.interval);
+    this.engine = setInterval(this.createSelection, this.intervalTime);
   },
   mounted: function() {
+    console.log('this.gameplay_playlist', this.gameplay_playlist)
     this.homeMusicScene.stop();
-    this.playMusicScene.play();
-    this.playMusicScene.mute(!this.musicSetting);
-    this.playMusicScene.volume(0.5)
-    
-    this.clickBtn.play()
-    this.clickBtn.mute(!this.soundSetting)
+    if (this.gameTypeSetting.indexOf('sound') < 0) {
+      this.playMusicScene.play();
+      this.playMusicScene.mute(!this.musicSetting);
+      this.playMusicScene.volume(0.5)
+    }
   },
   watch: {},
   methods: {
@@ -151,13 +162,7 @@ export default {
       }
       return 0;
     },
-    checkNumber() {
-      const length = this.history.length;
-      return (
-        this.selectedNumber ===
-        this.history[length - this.nBackLevel - 1].number
-      );
-    },
+    
     hideSelection() {
       this.selectedColumn = null;
       this.selectedRow = null;
@@ -171,6 +176,7 @@ export default {
       this.tries.position = false;
       this.selectedBtnPos = false;
       this.selectedBtnNum = false;
+      
       this.hidden = false;
       this.pushToHistory();
     },
@@ -181,6 +187,22 @@ export default {
     getRandomNumber() {
       var randNumber = Math.floor(Math.random() * (this.nBackLevel + 2) * 2 + 0)
       return randNumber > 9 ? 9 : randNumber
+    },
+    userSelectedSound() {
+      this.clickBtn.play()
+      this.clickBtn.mute(!this.soundSetting)
+
+      if (this.tries.sound) {
+        return;
+      }
+      this.selectedBtn_sound = true;
+      this.tries.sound = true;
+      if (this.checkSound()) {
+        this.INCR_CORRECT_CLUES()
+        this.SET_RIGHT_POINT("sound");
+      } else {
+        this.SET_WRONG_POINT("sound");
+      }
     },
     userSelectedNumber() {
       this.clickBtn.play()
@@ -214,7 +236,20 @@ export default {
         this.SET_WRONG_POINT("position");
       }
     },
-    
+    checkSound() {
+      const length = this.history.length;
+      return (
+        this.selectedSound ===
+        this.history[length - this.nBackLevel - 1].sound
+      );
+    },
+    checkNumber() {
+      const length = this.history.length;
+      return (
+        this.selectedNumber ===
+        this.history[length - this.nBackLevel - 1].number
+      );
+    },
     checkPosition() {
       const length = this.history.length;
       const target = this.history[length - this.nBackLevel - 1];

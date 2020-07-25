@@ -4,6 +4,7 @@
       <router-link
         class="router-link-active absolute left-0 h-full pl-2 flex content-center flex-wrap"
         to="/"
+        v-on:click="clickSound()"
       >
         <img class="w-8" src="@/assets/images/back-btn.png" />
       </router-link>
@@ -12,6 +13,7 @@
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 export default {
   name: "navigator",
   props: {
@@ -19,6 +21,19 @@ export default {
   },
   data() {
     return {};
+  },
+  computed: {
+    ...mapState({
+      clickBtn: state => state.sound_clickBtn
+    })
+  },
+  methods: {
+    clickSound() {
+      console.log('click sound')
+      this.clickBtn.play();
+      this.clickBtn.mute(!this.soundSetting);
+      this.clickBtn.loop(false)
+    }
   }
 };
 </script>
