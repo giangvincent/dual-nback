@@ -9,24 +9,10 @@
  */
 
 /* load font source */
-@mixin font($font-family, $font-file, $font-weight, $font-style) {
-  @font-face {
-    font-family: $font-family;
-    src: url($font-file+'.ttf') format('truetype');
-    font-weight: $font-weight;
-    font-style: $font-style;
-  }
-}
-
-@include font('Baloo', '../../assets/fonts/Baloo2-Regular.ttf', 'normal', 'normal');
-@include font('Baloo', '../../assets/fonts/Baloo2-Medium.ttf', 500, 'medium');
-@include font('Baloo', '../../assets/fonts/Baloo2-SemiBold.ttf', 700, 'bold');
-
 body {
   background-color: #f0f0f0;
 }
 #app {
-  font-family: 'Baloo', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -34,22 +20,22 @@ body {
   width: 100%;
   -moz-user-select: none;
   -webkit-user-select: none;
-  -ms-user-select:none;
-  user-select:none;
-  -o-user-select:none;
+  -ms-user-select: none;
+  user-select: none;
+  -o-user-select: none;
 }
 .indicator-nav {
   background: #364f6b;
 }
 .btn-3d {
-  box-shadow: 0 .2em #18acb7; 
+  box-shadow: 0 0.2em #18acb7;
   border-color: #18acb7;
   color: #18acb7;
 }
 .btn-3d-active {
-	box-shadow: none;
-	position: relative;
-	top: .2em;
+  box-shadow: none;
+  position: relative;
+  top: 0.2em;
 }
 
 .link-active:active {
